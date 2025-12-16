@@ -1,0 +1,17 @@
+Escape the room by reaching the !
+
+When you observe, you will get a grid representing the level:
+@ represents your player
+W represents walls
+F represents floor
+P represents pushable blocks (movable)
+
+You can move in any direction but cannot move through walls.
+
+Pushable blocks will move in the opposite direction you hit them from. They will move as long as there is floor to move to. 
+
+Other characters represent mystery things you will have to discover. Move around, use your tools, solve the puzzle!
+
+Think step-by-step about the level and the path you have to take.
+
+The world progresses one time tick every time you move.

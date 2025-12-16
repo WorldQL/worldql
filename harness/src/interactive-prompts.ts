@@ -6,21 +6,13 @@ import { ALL_TOOLS, ALL_TOOL_HANDLERS } from "./tools/registry.ts";
  * Model choices per provider
  */
 const MODEL_CHOICES = {
-  anthropic: [
-    { value: "claude-sonnet-4-5-20250929", label: "Claude Sonnet 4.5" },
-    { value: "claude-opus-4-5-20251101", label: "Claude Opus 4.5" },
-    { value: "claude-haiku-4-0-20250107", label: "Claude Haiku 4.0" },
-    { value: "__CUSTOM__", label: "Custom..." },
-  ],
   openai: [
-    { value: "gpt-4o", label: "GPT-4o" },
-    { value: "gpt-4-turbo", label: "GPT-4 Turbo" },
-    { value: "gpt-3.5-turbo", label: "GPT-3.5 Turbo" },
+    { value: "gpt-5.2", label: "GPT 5.2" },
     { value: "__CUSTOM__", label: "Custom..." },
   ],
   openrouter: [
-    { value: "anthropic/claude-sonnet-4-5", label: "Claude Sonnet 4.5" },
-    { value: "openai/gpt-4o", label: "GPT-4o" },
+    { value: "anthropic/claude-sonnet-4.5", label: "Claude Sonnet 4.5" },
+    { value: "openai/gpt-5.2", label: "GPT 5.2" },
     { value: "google/gemini-3-pro-preview", label: "Gemini 3 Pro" },
     { value: "google/gemini-2.0-flash-exp", label: "Gemini 2.0 Flash" },
     { value: "__CUSTOM__", label: "Custom..." },
@@ -39,9 +31,9 @@ export async function promptForProvider(): Promise<string> {
   const provider = await p.select({
     message: "Select a provider:",
     options: [
-      { value: "anthropic", label: "Anthropic" },
-      { value: "openai", label: "OpenAI" },
       { value: "openrouter", label: "OpenRouter" },
+
+      { value: "openai", label: "OpenAI-compatible (Local supported)" },
     ],
   });
 
@@ -102,11 +94,9 @@ export async function promptForModel(provider: string): Promise<string> {
 /**
  * Prompt user to select tools via checkbox interface
  */
-export async function promptForTools(
-  defaultTools?: Tool[],
-): Promise<Tool[]> {
+export async function promptForTools(defaultTools?: Tool[]): Promise<Tool[]> {
   const defaultNames = new Set(
-    defaultTools?.map((t) => t.name) || DEFAULT_TOOL_NAMES,
+    defaultTools?.map((t) => t.name) || DEFAULT_TOOL_NAMES
   );
 
   const options = ALL_TOOLS.map((tool) => {
@@ -135,7 +125,7 @@ export async function promptForTools(
 
   if (!selectedNames || selectedNames.length === 0) {
     console.log(
-      "\n⚠️  Warning: No tools selected. The assistant will have limited capabilities.",
+      "\n⚠️  Warning: No tools selected. The assistant will have limited capabilities."
     );
     const proceed = await p.confirm({
       message: "Continue anyway?",
@@ -160,20 +150,20 @@ export async function promptForTools(
  * Prompt user to select an initial prompt file from the prompts directory
  */
 export async function promptForInitialPrompt(): Promise<string | null> {
-  const promptsDir = "../prompts";
+  const promptsDir = "./prompts";
 
   try {
     // Check if prompts directory exists
     const dirInfo = await Deno.stat(promptsDir);
     if (!dirInfo.isDirectory) {
       console.log(
-        `\n⚠️  '${promptsDir}' is not a directory. Skipping prompt selection.`,
+        `\n⚠️  '${promptsDir}' is not a directory. Skipping prompt selection.`
       );
       return null;
     }
   } catch {
     console.log(
-      `\n⚠️  Prompts directory '${promptsDir}' not found. Skipping prompt selection.`,
+      `\n⚠️  Prompts directory '${promptsDir}' not found. Skipping prompt selection.`
     );
     return null;
   }
@@ -188,7 +178,7 @@ export async function promptForInitialPrompt(): Promise<string | null> {
 
   if (promptFiles.length === 0) {
     console.log(
-      `\n⚠️  No .txt files found in '${promptsDir}' directory. Skipping prompt selection.`,
+      `\n⚠️  No .txt files found in '${promptsDir}' directory. Skipping prompt selection.`
     );
     return null;
   }
@@ -246,7 +236,7 @@ export function validateApiKey(provider: string): void {
  * Build tool registry mapping names to handlers for selected tools
  */
 export function buildToolRegistry(
-  selectedTools: Tool[],
+  selectedTools: Tool[]
 ): Record<string, ToolHandler> {
   const selectedNames = selectedTools.map((t) => t.name);
   const registry: Record<string, ToolHandler> = {};

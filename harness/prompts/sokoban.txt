@@ -1,0 +1,62 @@
+  Solve the Sokoban puzzle by pushing all blocks onto their goal positions!
+
+  Make sure to level-select the sokoban level 1 to start. After succesfully completing the level go to the next level.
+
+  When you observe, you will get a grid representing the level:
+  @ represents your player
+  O represents a goal position (empty - needs a block)
+  P represents a pushable block (NOT on a goal yet)
+  p represents a pushable block ON a goal (✓ solved!)
+  W represents walls
+  F represents floor
+  E represents enemies (they can move)
+  b represents collectible bombs (pickup items)
+  * represents bombs that were placed
+  X represents bombable walls that can be destroyed
+
+  SOKOBAN RULES:
+  - Push blocks by moving into them (you cannot pull blocks)
+  - CRITICAL: When you move INTO a block, the block moves in the SAME direction you're moving
+    Example: If you're at (0,0) and move RIGHT (+x) to (1,0) where a block is, the block moves RIGHT to (2,0)
+    Example: If you're at (3,3) and move UP (-y) to (3,2) where a block is, the block moves UP to (3,1)
+  - You can only push ONE block at a time (cannot push multiple blocks together)
+  - Blocks can only be pushed if the space behind them is empty (F, O, or other walkable tiles)
+  - You CANNOT push a block into: walls (W), bomb walls (X), other blocks (P or p), or enemies (E)
+  - Goal: Get ALL blocks onto goal positions (all P become p)
+  - Be careful! Blocks can get stuck against walls or in corners
+  - USE RestartLevel IMMEDIATELY if you: push a block into a deadlock, get stuck with no valid moves, or realize you made an irreversible mistake
+
+  IMPORTANT STRATEGY TIPS:
+  1. ANALYZE EVERY MOVE: Before moving, check if there's a block in that direction and WHERE IT WILL END UP
+  2. Plan your moves carefully - blocks can become permanently stuck
+  3. Never push a block into a corner unless that corner is a goal
+  4. Avoid pushing blocks against walls parallel to other walls
+  5. Work backwards from the goals - think about the last move first
+  6. You can walk on empty goals (O) - they're just floor tiles marking where blocks should go
+  7. Blocks on goals (p) can be pushed off and moved to other goals if needed
+  8. RESTART IMMEDIATELY when stuck - don't waste moves on an unsolvable state
+
+  DEADLOCK EXAMPLES (positions where blocks get permanently stuck):
+  - Block in corner: W W / W P (unless corner has a goal)
+  - Block against two adjacent walls with no goal there
+
+  BEFORE EACH MOVE, THINK:
+  1. "Is there a block where I'm about to move?"
+  2. "If yes, where will that block end up? (it moves in the direction I'm moving)"
+  3. "Will that destination create a deadlock? (corner, against wall, etc.)"
+  4. "Is this move safe or should I try a different approach?"
+
+  IF YOU REALIZE YOU'RE STUCK OR MADE A MISTAKE:
+  - DON'T try to continue - you'll waste time on an unsolvable state
+  - USE RestartLevel IMMEDIATELY to reset and try a new approach
+  - Deadlock indicators: blocks in corners without goals, blocks against parallel walls, no more valid moves
+
+  Think step-by-step about:
+  - Which blocks need to go to which goals
+  - The order to push blocks (some may block paths to others)
+  - Avoiding deadlock positions where blocks cannot be moved
+  - The path you need to take to push each block
+
+  The world progresses one time tick every time you move. Enemies move on the same tick system.
+
+  Other characters represent mystery things you will have to discover.

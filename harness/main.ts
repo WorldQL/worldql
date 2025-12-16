@@ -38,7 +38,7 @@ let selectedPrompt: string | null = null;
 
 if (useInteractive) {
   // Interactive mode with Clack prompts
-  p.intro("🎮 Open Monsters");
+  p.intro("WorldQL");
 
   provider = await promptForProvider();
   validateApiKey(provider);

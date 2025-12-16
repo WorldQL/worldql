@@ -38,7 +38,8 @@ export default class PlayerSpawner extends Behavior {
 
       if (connection.nickname !== "Puppet") {
         const gameSelectionEntity = this.game.world._.GameSelection;
-        const gameSelectionUI = gameSelectionEntity.getBehavior(GameSelectionUI);
+        const gameSelectionUI =
+          gameSelectionEntity.getBehavior(GameSelectionUI);
         gameSelectionUI.player = player;
         gameSelectionUI.connectionId = connection.id;
         gameSelectionUI.nickname = connection.nickname;
@@ -47,26 +48,22 @@ export default class PlayerSpawner extends Behavior {
       }
     });
 
-    this.game.httpAPI.attach(
-      "spawn-player",
-      [z.string().optional().describe("player name")],
-      (playerName) => {
-        if (!this.playerPrefab) {
-          throw new Error("no player prefab is assigned to the PlayerSpawner!");
-        }
-        const displayName = playerName || "Puppet";
-        const name = `Player.${displayName}`;
-        const player = this.playerPrefab.cloneInto(this.game.world, {
-          authority: "server",
-          name: name,
-        });
+    this.game.httpAPI.attach("spawn-player", [], () => {
+      if (!this.playerPrefab) {
+        throw new Error("no player prefab is assigned to the PlayerSpawner!");
+      }
+      const displayName = "Puppet";
+      const name = `Player.${displayName}`;
+      const player = this.playerPrefab.cloneInto(this.game.world, {
+        authority: "server",
+        name: name,
+      });
 
-        player._.Name.cast(RichText).text = displayName;
-        this.game.world._.MetricsUI.getBehavior(PlayerMetricsUI).player = player;
+      player._.Name.cast(RichText).text = displayName;
+      this.game.world._.MetricsUI.getBehavior(PlayerMetricsUI).player = player;
 
-        return { ref: player.ref };
-      },
-    );
+      return { ref: player.ref };
+    });
 
     this.game.httpAPI.attach(
       "respawn-player",
@@ -76,8 +73,8 @@ export default class PlayerSpawner extends Behavior {
           throw new Error("no player prefab is assigned to the PlayerSpawner!");
         }
 
-        const connection = Array.from(this.game.connections.entries()).find(([id]) =>
-          id === connectionId
+        const connection = Array.from(this.game.connections.entries()).find(
+          ([id]) => id === connectionId
         );
         if (!connection) {
           return { ok: false, error: "connection not found" };
@@ -90,11 +87,12 @@ export default class PlayerSpawner extends Behavior {
 
         player._.Name.cast(RichText).text = connection[1].nickname;
 
-        const gameSelectionUI = this.game.world._.GameSelection.getBehavior(GameSelectionUI);
+        const gameSelectionUI =
+          this.game.world._.GameSelection.getBehavior(GameSelectionUI);
         gameSelectionUI.player = player;
 
         return { ok: true, ref: player.ref };
-      },
+      }
     );
 
     this.game.httpAPI.attach(
@@ -110,17 +108,22 @@ export default class PlayerSpawner extends Behavior {
         const player = this.game.world.entities.lookupByRef(ref);
         if (!player) return { ok: false, error: "player does not exist!" };
         const playerMovement = player.getBehaviorIfExists(PlayerMovement);
-        if (!playerMovement) return { ok: false, error: "provided entity was not a player!" };
+        if (!playerMovement)
+          return { ok: false, error: "provided entity was not a player!" };
 
         if (player.authority !== "server") {
-          return { ok: false, error: "provided entity was not a puppeted player!" };
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
         }
 
         const newPos = playerMovement.checkMove(x, y);
         if (!newPos) return { ok: false, error: "move was not valid" };
 
         const moveResult = playerMovement.moveTo(newPos);
-        const actions = moveResult.actions?.length === 0 ? undefined : moveResult.actions;
+        const actions =
+          moveResult.actions?.length === 0 ? undefined : moveResult.actions;
 
         if (!moveResult.success) {
           return {
@@ -133,38 +136,54 @@ export default class PlayerSpawner extends Behavior {
         }
 
         return { ok: true, actions };
-      },
+      }
     );
 
-    this.game.httpAPI.attach("vision", [z.string().describe("player ref")], ref => {
-      const player = this.game.world.entities.lookupByRef(ref);
-      if (!player) return { ok: false, error: "player does not exist!" };
-      const playerMovement = player.getBehaviorIfExists(PlayerMovement);
-      if (!playerMovement) return { ok: false, error: "provided entity was not a player!" };
-      if (player.authority !== "server") {
-        return { ok: false, error: "provided entity was not a puppeted player!" };
+    this.game.httpAPI.attach(
+      "vision",
+      [z.string().describe("player ref")],
+      (ref) => {
+        const player = this.game.world.entities.lookupByRef(ref);
+        if (!player) return { ok: false, error: "player does not exist!" };
+        const playerMovement = player.getBehaviorIfExists(PlayerMovement);
+        if (!playerMovement)
+          return { ok: false, error: "provided entity was not a player!" };
+        if (player.authority !== "server") {
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
+        }
+
+        return { ok: true, world: playerMovement.vision() };
       }
+    );
 
-      return { ok: true, world: playerMovement.vision() };
-    });
+    this.game.httpAPI.attach(
+      "place-bomb",
+      [z.string().describe("player ref")],
+      (ref) => {
+        const player = this.game.world.entities.lookupByRef(ref);
+        if (!player) return { ok: false, error: "player does not exist!" };
+        const playerMovement = player.getBehaviorIfExists(PlayerMovement);
+        if (!playerMovement)
+          return { ok: false, error: "provided entity was not a player!" };
 
-    this.game.httpAPI.attach("place-bomb", [z.string().describe("player ref")], ref => {
-      const player = this.game.world.entities.lookupByRef(ref);
-      if (!player) return { ok: false, error: "player does not exist!" };
-      const playerMovement = player.getBehaviorIfExists(PlayerMovement);
-      if (!playerMovement) return { ok: false, error: "provided entity was not a player!" };
+        if (player.authority !== "server") {
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
+        }
 
-      if (player.authority !== "server") {
-        return { ok: false, error: "provided entity was not a puppeted player!" };
+        const result = playerMovement.placeBomb();
+        if (!result.success) {
+          return { ok: false, error: result.error };
+        }
+
+        return { ok: true };
       }
-
-      const result = playerMovement.placeBomb();
-      if (!result.success) {
-        return { ok: false, error: result.error };
-      }
-
-      return { ok: true };
-    });
+    );
 
     this.game.httpAPI.attach("restart-level", [], () => {
       const blockManager = PushableBlockManager.instance;
@@ -175,17 +194,24 @@ export default class PlayerSpawner extends Behavior {
       return { ok: true };
     });
 
-    this.game.httpAPI.attach("delete-player", [z.string().describe("player ref")], ref => {
-      const player = this.game.world.entities.lookupByRef(ref);
-      if (!player) return { ok: false, error: "player does not exist!" };
+    this.game.httpAPI.attach(
+      "delete-player",
+      [z.string().describe("player ref")],
+      (ref) => {
+        const player = this.game.world.entities.lookupByRef(ref);
+        if (!player) return { ok: false, error: "player does not exist!" };
 
-      if (player.authority !== "server") {
-        return { ok: false, error: "provided entity was not a puppeted player!" };
+        if (player.authority !== "server") {
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
+        }
+
+        player.destroy();
+        return { ok: true };
       }
-
-      player.destroy();
-      return { ok: true };
-    });
+    );
 
     this.game.httpAPI.attach(
       "level-select",
@@ -198,10 +224,14 @@ export default class PlayerSpawner extends Behavior {
         const player = this.game.world.entities.lookupByRef(ref);
         if (!player) return { ok: false, error: "player does not exist!" };
         const playerMovement = player.getBehaviorIfExists(PlayerMovement);
-        if (!playerMovement) return { ok: false, error: "provided entity was not a player!" };
+        if (!playerMovement)
+          return { ok: false, error: "provided entity was not a player!" };
 
         if (player.authority !== "server") {
-          return { ok: false, error: "provided entity was not a puppeted player!" };
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
         }
 
         let levelStart: Entity | undefined;
@@ -228,24 +258,34 @@ export default class PlayerSpawner extends Behavior {
         }
 
         return { ok: true };
-      },
+      }
     );
 
-    this.game.httpAPI.attach("player-metrics", [z.string().describe("player ref")], ref => {
-      const player = this.game.world.entities.lookupByRef(ref);
-      if (!player) return { ok: false, error: "player does not exist!" };
+    this.game.httpAPI.attach(
+      "player-metrics",
+      [z.string().describe("player ref")],
+      (ref) => {
+        const player = this.game.world.entities.lookupByRef(ref);
+        if (!player) return { ok: false, error: "player does not exist!" };
 
-      if (player.authority !== "server") {
-        return { ok: false, error: "provided entity was not a puppeted player!" };
+        if (player.authority !== "server") {
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
+        }
+
+        const metrics = player.getBehaviorIfExists(PlayerMetrics);
+        if (!metrics) {
+          return {
+            ok: false,
+            error: "player does not have metrics tracking enabled!",
+          };
+        }
+
+        return { ok: true, metrics: metrics.getSummary() };
       }
-
-      const metrics = player.getBehaviorIfExists(PlayerMetrics);
-      if (!metrics) {
-        return { ok: false, error: "player does not have metrics tracking enabled!" };
-      }
-
-      return { ok: true, metrics: metrics.getSummary() };
-    });
+    );
 
     // Portal endpoints
     this.game.httpAPI.attach(
@@ -253,21 +293,27 @@ export default class PlayerSpawner extends Behavior {
       [
         z.string().describe("player ref"),
         z.enum(["blue", "orange"]).describe("portal color"),
-        z.object({
-          x: z.number().int(),
-          y: z.number().int(),
-        }).describe("target tile position"),
+        z
+          .object({
+            x: z.number().int(),
+            y: z.number().int(),
+          })
+          .describe("target tile position"),
       ],
       (ref, portalColor, targetTile) => {
         const player = this.game.world.entities.lookupByRef(ref);
         if (!player) return { ok: false, error: "player does not exist!" };
 
         if (player.authority !== "server") {
-          return { ok: false, error: "provided entity was not a puppeted player!" };
+          return {
+            ok: false,
+            error: "provided entity was not a puppeted player!",
+          };
         }
 
         const playerMovement = player.getBehaviorIfExists(PlayerMovement);
-        if (!playerMovement) return { ok: false, error: "provided entity was not a player!" };
+        if (!playerMovement)
+          return { ok: false, error: "provided entity was not a player!" };
 
         const portalManager = PortalManager.instance;
         if (!portalManager) {
@@ -275,18 +321,17 @@ export default class PlayerSpawner extends Behavior {
         }
 
         const playerPos = playerMovement.pos;
-        const result = portalManager.placePortal(
-          portalColor,
-          targetTile,
-          { x: playerPos.x, y: playerPos.y },
-        );
+        const result = portalManager.placePortal(portalColor, targetTile, {
+          x: playerPos.x,
+          y: playerPos.y,
+        });
 
         if (!result.success) {
           return { ok: false, error: result.error };
         }
 
         return { ok: true };
-      },
+      }
     );
 
     this.game.httpAPI.attach("get-portals", [], () => {
@@ -310,7 +355,7 @@ export default class PlayerSpawner extends Behavior {
 
         portalManager.removePortal(portalColor);
         return { ok: true };
-      },
+      }
     );
 
     this.game.httpAPI.attach("clear-portals", [], () => {

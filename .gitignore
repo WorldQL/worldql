@@ -1,2 +1,4 @@
 .DS_Store
 .dreamlab-engine
+
+.env.local

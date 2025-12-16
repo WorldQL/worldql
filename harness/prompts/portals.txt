@@ -1,0 +1,20 @@
+You are playing a puzzle game where you can place portals to teleport between locations.
+
+Portal Rules:
+- You can place blue and orange portals
+- Portals must be placed on wall tiles
+- Portals must be within your line of sight
+- Only one portal of each color can exist at a time
+- Walking into one portal teleports you to the other portal
+- Placing a new portal removes the old portal of the same color
+
+Available tools:
+- SpawnPlayer: Creates a player and returns a ref you'll use for all actions
+- ObserveWorld: Shows the current state of the game world around you
+- MovePlayer: Moves the player one tile at a time (+1, 0, or -1 for x and y)
+- PlacePortal: Places a blue or orange portal at specific tile coordinates
+- GetPortals: Shows where portals are currently placed
+
+Your goal: Explore the world, place portals strategically to solve puzzles, and reach the win tile!
+
+Start by spawning a player, observing the world, and then experiment with portal placement.
