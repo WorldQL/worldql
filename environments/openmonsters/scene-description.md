@@ -1,0 +1,237 @@
+The following is a description of the current scene in a compact format. (posX, posY, scaleX, scaleY). All child positions and scale are relative to parent. 
+
+world:
+- TileActionManager (Empty) (-1.7, 0.04, 1, 1)
+  - src/tiles/action-manager.ts
+- Tilemap (Tilemap) (0, 0, 1, 1)
+- DEBUG_Win (Empty) (0.03, 2.07, 1, 1)
+  - src/tiles/dialogue.ts
+  - src/tiles/teleport.ts
+- RoomOffset (Empty) (-3, 4, 1, 1)
+- Sokoban (Empty) (40.1, -41.53, 1, 1)
+  - Level1 (Empty) (-66.48, -46.42, 1, 1)
+  - Level2 (Empty) (-58.02, -46.58, 1, 1)
+  - Level3 (Empty) (-45.11, -50.95, 1, 1)
+  - Level4 (Empty) (-35.79, -47.93, 1, 1)
+  - Level5 (Empty) (-63.95, -61.73, 1, 1)
+  - Level6 (Empty) (-56.16, -62.14, 1, 1)
+  - Level7 (Empty) (-43.21, -62.44, 1, 1)
+  - Level8 (Empty) (-36.71, -57.43, 1, 1)
+- PortalManager (Empty) (0, 0, 1, 1)
+  - src/mechanics/portal-manager.ts
+- KeysAndDoors (Empty) (0, 0, 1, 1)
+  - Level1 (Empty) (-11.47, -2.19, 1, 1)
+    - Win (Empty) (-15.79, 1.92, 1, 1)
+      - src/tiles/dialogue.ts
+      - src/tiles/teleport.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - DoorHandler (Empty) (-10.33, 1.76, 1, 1)
+      - src/mechanics/door-handler.ts
+    - ColorActions (Empty) (-10.35, 1.67, 1, 1)
+      - src/mechanics/color-action.ts
+    - LevelStart (Empty) (-15.55, -1.36, 1, 1)
+    - GreenKey.1 (Empty) (-15.45, -3.89, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+    - BlueKey.1 (Empty) (-9.52, -4.87, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+    - GreenKey.2 (Empty) (-4.51, -4.88, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+  - Level2 (Empty) (-11.47, -2.19, 1, 1)
+    - Win (Empty) (15.48, -1.83, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (9.5, 2.26, 1, 1)
+    - GreenKey.1 (Empty) (9.35, 7.14, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+    - BlueKey.1 (Empty) (13.79, 1.47, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+    - GreenKey.2 (Empty) (3.48, 1.31, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+    - BlueKey.2 (Empty) (6.44, 1.24, 1, 1)
+      - src/collectibles/key.ts
+      - src/tiles/dialogue.ts
+      - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+      - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+      - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+      - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+  - RichText (RichText) (-11.82, 9.07, 5.57, 5.48)
+- Bombs (Empty) (0, 0, 1, 1)
+  - Level1 (Empty) (-7.01, -25.91, 1, 1)
+    - Win (Empty) (-13.91, 7.81, 1, 1)
+      - src/tiles/dialogue.ts
+      - src/tiles/teleport.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (-14.94, -4.06, 1, 1)
+    - BombPickup (Empty) (-20.83, -4.01, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+    - BombPickup.1 (Empty) (-9, 1.01, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+    - BombPickup.2 (Empty) (-21.06, 1, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+  - RichText (RichText) (-11.75, -14.12, 5.57, 5.48)
+  - Level2 (Empty) (-7.01, -25.91, 1, 1)
+    - Win (Empty) (-0.01, 5.08, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (2.06, -2.83, 1, 1)
+    - BombPickup (Empty) (-0.73, -4.04, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+    - BombPickup.1 (Empty) (2.9, 5.88, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+    - BombPickup.2 (Empty) (0.03, 2.97, 1, 1)
+      - src/collectibles/bomb.ts
+      - src/tiles/dialogue.ts
+      - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+      - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+      - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+- PushableBlocks (Empty) (0, 0, 1, 1)
+  - Level1 (Empty) (-7.01, -25.91, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (-9.03, -27.12, 1, 1)
+      - src/tiles/dialogue.ts
+      - src/tiles/teleport.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (-20.01, -26.55, 1, 1)
+  - Level2 (Empty) (-7.01, -25.91, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (-0.01, -22.08, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (-0.76, -26.84, 1, 1)
+  - RichText (RichText) (-11.75, -37.33, 5.57, 5.48)
+- Portals (Empty) (0, 0, 1, 1)
+  - Level1 (Empty) (-7.01, -25.91, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (-10.11, -40.39, 1, 1)
+      - src/tiles/dialogue.ts
+      - src/tiles/teleport.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (-17.89, -44.29, 1, 1)
+  - Level2 (Empty) (-7.01, -25.91, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (10.01, -40.21, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (1.92, -40.39, 1, 1)
+  - RichText (RichText) (-11.75, -59.93, 5.57, 5.48)
+  - Level3 (Empty) (-7.01, -25.91, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (29.86, -49, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (20.8, -39.79, 1, 1)
+  - RichText.1 (RichText) (17.99, -59.93, 5.57, 5.48)
+  - RichText.2 (RichText) (17.99, -61.13, 5.57, 5.48)
+- GameSelection (UILayer) (-13.92, -14.89, 1, 1)
+  - src/ui/game-selection.tsx
+- MetricsUI (UILayer) (-1.56, -6.68, 1, 1)
+  - src/ui/player-metrics.tsx
+- LevelNavigation (UILayer) (-3.65, -67.89, 1, 1)
+  - src/ui/level-navigation.tsx
+
+local:
+- Camera (Camera) (0, 0, 1, 1)
+  - src/camera/pan-zoom.ts
+- EditorText (Empty) (11.27, -11.33, 1, 1)
+  - Sokoban (RichText) (-22.43, -71.01, 5.25, 6.91)
+
+server:
+- PlayerSpawner (Empty) (0, 0, 1, 1)
+  - src/player/spawner.ts
+
+prefabs:
+- DialogueText (UIPanel) (0, 0, 1, 1)
+  - src/ui/dialogue-text.tsx
+- Player (Empty) (-23.41, -70.23, 1, 1)
+  - src/player/movement.ts
+  - src/camera/follow.ts
+  - src/player/inventory.ts
+  - src/player/metrics.ts
+  - src/mechanics/portal-placement.ts
+  - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+  - LightOverlay (RawPixi) (0, 0, 1, 1)
+    - src/effects/light-overlay.ts
+  - Name (RichText) (0, 0, 1, 1)
+- GoldPile (Empty) (0, 0, 1, 1)
+  - src/collectibles/gold.ts
+  - Gold.1 (ColoredSquare) (-0.16, 0.19, 0.3, 0.32)
+  - Gold.2 (ColoredSquare) (0.24, -0.26, 0.31, 0.32)
+  - Gold.3 (ColoredSquare) (-0.21, -0.26, 0.31, 0.32)
+- BlueKey (Empty) (0, 0, 1, 1)
+  - src/collectibles/key.ts
+  - src/tiles/dialogue.ts
+  - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+  - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+  - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+  - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+- GreenKey (Empty) (0, 0, 1, 1)
+  - src/collectibles/key.ts
+  - src/tiles/dialogue.ts
+  - Key (ColoredPolygon) (-0.21, 0, 1, 1)
+  - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
+  - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
+  - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
+- Enemy (Empty) (0, 0, 1, 1)
+  - src/enemies/movement.ts
+  - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+- BombPickup (Empty) (2, 1, 1, 1)
+  - src/collectibles/bomb.ts
+  - src/tiles/dialogue.ts
+  - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+  - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+  - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
+- BombPlaced (Empty) (1, 1, 1, 1)
+  - src/mechanics/placed-bomb.ts
+  - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
+  - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
+  - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
