@@ -84,7 +84,7 @@ world:
       - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
       - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
       - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
-  - RichText (RichText) (-11.82, 9.07, 5.57, 5.48)
+  - RichText (RichText) (-11.82, 9.07, 5, 5)
 - Bombs (Empty) (0, 0, 1, 1)
   - Level1 (Empty) (-7.01, -25.91, 1, 1)
     - Win (Empty) (-13.91, 7.81, 1, 1)
@@ -110,7 +110,7 @@ world:
       - ColoredPolygon (ColoredPolygon) (0, -0.1, 0.5, 0.5)
       - ColoredSquare (ColoredSquare) (0, 0.1, 0.2, 0.2)
       - ColoredSquare.1 (ColoredSquare) (0.02, 0.21, 0.03, 0.15)
-  - RichText (RichText) (-11.75, -14.12, 5.57, 5.48)
+  - RichText (RichText) (-11.75, -14.12, 5, 5)
   - Level2 (Empty) (-7.01, -25.91, 1, 1)
     - Win (Empty) (-0.01, 5.08, 1, 1)
       - src/tiles/dialogue.ts
@@ -148,7 +148,7 @@ world:
       - src/tiles/dialogue.ts
       - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
     - LevelStart (Empty) (-0.76, -26.84, 1, 1)
-  - RichText (RichText) (-11.75, -37.33, 5.57, 5.48)
+  - RichText (RichText) (-11.75, -37.33, 5, 5)
 - Portals (Empty) (0, 0, 1, 1)
   - Level1 (Empty) (-7.01, -25.91, 1, 1)
     - src/mechanics/pushable-block-manager.ts
@@ -163,15 +163,15 @@ world:
       - src/tiles/dialogue.ts
       - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
     - LevelStart (Empty) (1.92, -40.39, 1, 1)
-  - RichText (RichText) (-11.75, -59.93, 5.57, 5.48)
+  - RichText (RichText) (-11.75, -59.93, 5, 5)
   - Level3 (Empty) (-7.01, -25.91, 1, 1)
     - src/mechanics/pushable-block-manager.ts
     - Win (Empty) (29.86, -49, 1, 1)
       - src/tiles/dialogue.ts
       - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
     - LevelStart (Empty) (20.8, -39.79, 1, 1)
-  - RichText.1 (RichText) (17.99, -59.93, 5.57, 5.48)
-  - RichText.2 (RichText) (17.99, -61.13, 5.57, 5.48)
+  - RichText.1 (RichText) (17.99, -59.93, 5, 5)
+  - RichText.2 (RichText) (17.99, -61.13, 5, 5)
 - GameSelection (UILayer) (-13.92, -14.89, 1, 1)
   - src/ui/game-selection.tsx
 - MetricsUI (UILayer) (-1.56, -6.68, 1, 1)
@@ -183,7 +183,7 @@ local:
 - Camera (Camera) (0, 0, 1, 1)
   - src/camera/pan-zoom.ts
 - EditorText (Empty) (11.27, -11.33, 1, 1)
-  - Sokoban (RichText) (-22.43, -71.01, 5.25, 6.91)
+  - Sokoban (RichText) (-22.43, -71.01, 5, 5)
 
 server:
 - PlayerSpawner (Empty) (0, 0, 1, 1)
