@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env --watch main.ts",
+    "start": "deno run --allow-net --allow-read --allow-env main.ts"
+  },
+  "imports": {
+    "openai": "npm:openai@^6.10.0",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.0",
+    "@std/cli": "jsr:@std/cli@^1.0.0",
+    "@clack/prompts": "npm:@clack/prompts@^0.11.0"
+  },
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["esnext", "dom", "deno.ns"]
+  }
+}
