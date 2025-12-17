@@ -1,4 +1,11 @@
-import { Behavior, EntityRef, IVector2, Tilemap, value, Vector2 } from "@dreamlab/engine";
+import {
+  Behavior,
+  EntityRef,
+  IVector2,
+  Tilemap,
+  value,
+  Vector2,
+} from "@dreamlab/engine";
 import { Colors } from "../../lib/colors.ts";
 import { PlayerMoved } from "../player/movement.ts";
 
@@ -34,7 +41,7 @@ export default class PortalManager extends Behavior {
   placePortal(
     portalColor: "blue" | "orange",
     targetTile: IVector2,
-    playerPos: IVector2,
+    playerPos: IVector2
   ): { success: boolean; error?: string } {
     if (!this.tilemap) {
       return { success: false, error: "Tilemap not found" };
@@ -42,9 +49,12 @@ export default class PortalManager extends Behavior {
 
     const tileColor = this.tilemap.getColor(targetTile.x, targetTile.y);
 
+    console.log(tileColor);
+
     if (
-      tileColor !== Colors.Wall && tileColor !== Colors.BombWall
-      && tileColor !== Colors.GlassWall
+      tileColor !== Colors.Wall &&
+      tileColor !== Colors.BombWall &&
+      tileColor !== Colors.GlassWall
     ) {
       return { success: false, error: "Can only place portals on walls" };
     }
@@ -95,7 +105,7 @@ export default class PortalManager extends Behavior {
       const worldY = from.y + dy * t;
 
       const worldDistToTarget = Math.sqrt(
-        Math.pow(worldX - to.x, 2) + Math.pow(worldY - to.y, 2),
+        Math.pow(worldX - to.x, 2) + Math.pow(worldY - to.y, 2)
       );
 
       const x = Math.round(worldX);
@@ -120,10 +130,10 @@ export default class PortalManager extends Behavior {
       const tileColor = this.tilemap.getColor(x, y);
 
       if (
-        tileColor === Colors.Wall
-        || tileColor === Colors.BombWall
-        || tileColor === Colors.GreenDoor
-        || tileColor === Colors.BlueDoor
+        tileColor === Colors.Wall ||
+        tileColor === Colors.BombWall ||
+        tileColor === Colors.GreenDoor ||
+        tileColor === Colors.BlueDoor
       ) {
         return false;
       }
@@ -142,7 +152,11 @@ export default class PortalManager extends Behavior {
     const portal = portalColor === "blue" ? this.bluePortal : this.orangePortal;
     if (!portal) return;
 
-    this.tilemap.setColor(portal.position.x, portal.position.y, portal.originalTileColor);
+    this.tilemap.setColor(
+      portal.position.x,
+      portal.position.y,
+      portal.originalTileColor
+    );
 
     if (portalColor === "blue") {
       this.bluePortal = undefined;
@@ -163,16 +177,16 @@ export default class PortalManager extends Behavior {
     const playerPos = event.position;
 
     if (
-      playerPos.x === this.bluePortal.position.x
-      && playerPos.y === this.bluePortal.position.y
+      playerPos.x === this.bluePortal.position.x &&
+      playerPos.y === this.bluePortal.position.y
     ) {
       event.teleport = this.orangePortal.position.clone();
       return;
     }
 
     if (
-      playerPos.x === this.orangePortal.position.x
-      && playerPos.y === this.orangePortal.position.y
+      playerPos.x === this.orangePortal.position.x &&
+      playerPos.y === this.orangePortal.position.y
     ) {
       event.teleport = this.bluePortal.position.clone();
       return;

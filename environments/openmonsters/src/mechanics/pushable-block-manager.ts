@@ -9,6 +9,7 @@ import {
 } from "@dreamlab/engine";
 import { Colors } from "../../lib/colors.ts";
 import { PlayerMoved } from "../player/movement.ts";
+import PortalManager from "./portal-manager.ts";
 
 export default class PushableBlockManager extends Behavior {
   @value({ type: EntityRef })
@@ -50,8 +51,45 @@ export default class PushableBlockManager extends Behavior {
         y: to.y + direction.y,
       };
 
+      // Check if the block is being pushed into a portal
+      const targetColor = tilemap.getColor(oppositePos.x, oppositePos.y);
+      let finalBlockPos = oppositePos;
+
+      if ((targetColor === Colors.BluePortal || targetColor === Colors.OrangePortal) && PortalManager.instance) {
+        const portalInfo = PortalManager.instance.getPortalInfo();
+
+        if (portalInfo.bluePortal && portalInfo.orangePortal) {
+          // Determine which portal the block is entering
+          let exitPortal: { x: number; y: number } | null = null;
+
+          if (targetColor === Colors.BluePortal) {
+            exitPortal = portalInfo.orangePortal;
+          } else if (targetColor === Colors.OrangePortal) {
+            exitPortal = portalInfo.bluePortal;
+          }
+
+          if (exitPortal) {
+            // Find the nearest adjacent floor tile to the exit portal
+            const adjacentPositions = [
+              { x: exitPortal.x + 1, y: exitPortal.y }, // right
+              { x: exitPortal.x - 1, y: exitPortal.y }, // left
+              { x: exitPortal.x, y: exitPortal.y + 1 }, // down
+              { x: exitPortal.x, y: exitPortal.y - 1 }, // up
+            ];
+
+            for (const pos of adjacentPositions) {
+              const adjColor = tilemap.getColor(pos.x, pos.y);
+              if (adjColor === Colors.Grass) {
+                finalBlockPos = pos;
+                break;
+              }
+            }
+          }
+        }
+      }
+
       const fromKey = `${to.x},${to.y}`;
-      const toKey = `${oppositePos.x},${oppositePos.y}`;
+      const toKey = `${finalBlockPos.x},${finalBlockPos.y}`;
 
       const restoreColor = this.#goalPositions.has(fromKey) ? Colors.BlockGoal : Colors.Grass;
       tilemap.setColor(to.x, to.y, restoreColor);
@@ -59,7 +97,7 @@ export default class PushableBlockManager extends Behavior {
       const newBlockColor = this.#goalPositions.has(toKey)
         ? Colors.BlockOnGoal
         : Colors.PushableBlock;
-      tilemap.setColor(oppositePos.x, oppositePos.y, newBlockColor);
+      tilemap.setColor(finalBlockPos.x, finalBlockPos.y, newBlockColor);
     });
   }
 
