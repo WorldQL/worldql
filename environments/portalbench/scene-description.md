@@ -66,9 +66,6 @@ prefabs:
   - Key.1 (ColoredSquare) (0.1, 0, 0.5, 0.1)
   - Key.2 (ColoredSquare) (0.26, -0.05, 0.2, 0.07)
   - Key.3 (ColoredSquare) (0.08, -0.05, 0.1, 0.07)
-- Enemy (Empty) (0.21, -3, 1, 1)
-  - src/enemies/movement.ts
-  - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
 - BombPickup (Empty) (2, 1, 1, 1)
   - src/collectibles/bomb.ts
   - src/tiles/dialogue.ts

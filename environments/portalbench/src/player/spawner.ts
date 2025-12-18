@@ -14,6 +14,7 @@ import GameSelectionUI from "../ui/game-selection.tsx";
 import PlayerMetricsUI from "../ui/player-metrics.tsx";
 import PlayerMetrics from "./metrics.ts";
 import PlayerMovement from "./movement.ts";
+import { levelToWorld, worldToLevel } from "../utils/coordinates.ts";
 
 export default class PlayerSpawner extends Behavior {
   @value({ type: EntityRef })
@@ -21,9 +22,6 @@ export default class PlayerSpawner extends Behavior {
 
   onInitialize(): void {
     if (!this.game.isServer()) return;
-
-    const offset = this.game.entities.lookupById("world/RoomOffset")!.pos;
-    const t = (v: Vector2) => new Vector2(v.x - offset.x, v.y + offset.y);
 
     this.game.on(PlayerJoined, ({ connection }) => {
       if (!this.playerPrefab) {
@@ -272,9 +270,9 @@ export default class PlayerSpawner extends Behavior {
             x: z.number().int(),
             y: z.number().int(),
           })
-          .describe("target tile position (grid col, row from vision)"),
+          .describe("target tile position (level col, row from vision)"),
       ],
-      (ref, portalColor, gridPos) => {
+      (ref, portalColor, levelPos) => {
         const player = this.game.world.entities.lookupByRef(ref);
         if (!player) return { ok: false, error: "player does not exist!" };
 
@@ -299,13 +297,7 @@ export default class PlayerSpawner extends Behavior {
           return { ok: false, error: "could not get player vision" };
         }
 
-        const levelX = vision.origin.x + gridPos.x;
-        const levelY = vision.origin.y - gridPos.y;
-
-        const worldTargetTile = {
-          x: levelX + offset.x,
-          y: levelY - offset.y,
-        };
+        const worldTargetTile = levelToWorld(levelPos, vision.origin);
 
         const playerPos = playerMovement.pos;
         const result = portalManager.placePortal(
@@ -316,26 +308,12 @@ export default class PlayerSpawner extends Behavior {
         );
 
         if (!result.success) {
-          return {
-            ok: false,
-            error: result.error,
-            debug: {
-              receivedGridCoords: gridPos,
-              visionOrigin: vision.origin,
-              convertedToLevelCoords: { x: levelX, y: levelY },
-              convertedToWorldCoords: worldTargetTile,
-              offset: { x: offset.x, y: offset.y },
-            },
-          };
+          return { ok: false, error: result.error };
         }
 
         if (result.position) {
-          const portalLevelX = result.position.x - offset.x;
-          const portalLevelY = result.position.y + offset.y;
-          const portalGridX = portalLevelX - vision.origin.x;
-          const portalGridY = vision.origin.y - portalLevelY;
-
-          return { ok: true, position: { x: portalGridX, y: portalGridY } };
+          const portalLevelPos = worldToLevel(result.position, vision.origin);
+          return { ok: true, position: { x: portalLevelPos.x, y: portalLevelPos.y } };
         }
 
         return { ok: true };

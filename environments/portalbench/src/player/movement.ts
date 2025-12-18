@@ -401,15 +401,10 @@ export default class PlayerMovement extends Behavior {
       rowIndex++;
     }
 
-    const offset = this.game.entities.lookupById("world/RoomOffset")?.pos;
-    const levelOrigin = offset
-      ? { x: minX - offset.x, y: maxY + offset.y }
-      : { x: minX, y: maxY };
-
     return {
       grid: rows,
       player: { x: playerGridX, y: playerGridY },
-      origin: levelOrigin,
+      origin: { x: minX, y: maxY },
       goals,
     };
   }

@@ -742,41 +742,6 @@
           ]
         },
         {
-          "ref": "ent_Max3aWwgwt",
-          "type": "@core/Empty",
-          "name": "Enemy",
-          "transform": {
-            "position": {
-              "x": 0.21212121212121282,
-              "y": -3.000000000000004
-            }
-          },
-          "behaviors": [
-            {
-              "ref": "bhv_EBFYmajJfi",
-              "script": "res://src/enemies/movement.ts",
-              "values": {
-                "tilemap": "ent_diIkTR4dUm"
-              }
-            }
-          ],
-          "children": [
-            {
-              "ref": "ent_4EWLGwHCL5",
-              "type": "@core/ColoredSquare",
-              "name": "ColoredSquare",
-              "values": {
-                "color": [
-                  1,
-                  0,
-                  0,
-                  1
-                ]
-              }
-            }
-          ]
-        },
-        {
           "ref": "ent_vECXqaaXMj",
           "type": "@core/Empty",
           "name": "BombPickup",
