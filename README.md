@@ -1,5 +1,11 @@
 # WorldQL
 
+## Latest News
+We're hosting a hackathon!
+<a href="https://discord.gg/nPWVJzZFnP"><img width="1185" height="606" alt="Frame 6" src="https://github.com/user-attachments/assets/8af1ffc1-6612-49f4-88cf-4ce77878ac80" /></a>
+
+Join our brand new Discord to register (or if you just want to join the community): [https://discord.gg/nPWVJzZFnP](https://discord.gg/nPWVJzZFnP)
+
 ## Motivation / Why build this?
 Demand for environments to evaluate and train AI continues to grow. However, as environments grow in complexity, the headless scripts that power them can become difficult to debug and observe. Developers have to waste time to solve painful state management problems that have been solved before.
 
@@ -41,3 +47,4 @@ OPENAI_API_KEY=something
 ```
 
 We recommend using OpenRouter to test a wide variety of models.
+
