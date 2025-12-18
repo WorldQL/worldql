@@ -13,7 +13,6 @@ Available tools:
 - ObserveWorld: Shows the current state of the game world around you
 - MovePlayer: Moves the player one tile at a time (+1, 0, or -1 for x and y)
 - PlacePortal: Places a blue or orange portal at specific tile coordinates
-- GetPortals: Shows where portals are currently placed
 
 Your goal: Explore the world, place portals strategically to solve puzzles, and reach the win tile!
 
