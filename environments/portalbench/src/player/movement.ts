@@ -301,6 +301,12 @@ export default class PlayerMovement extends Behavior {
       [Colors.BlockOnGoal]: "p", // block on goal
       [Colors.BluePortal]: "1", // blue portal
       [Colors.OrangePortal]: "2", // orange portal
+      [0xff00ff]: "3", // magenta portal
+      [0x00ffff]: "4", // cyan portal
+      [0xffff00]: "5", // yellow portal
+      [0x00ff00]: "6", // lime portal
+      [0xff0080]: "7", // pink portal
+      [0x0080ff]: "8", // sky blue portal
     };
 
     const objMap: Record<string, string> = {

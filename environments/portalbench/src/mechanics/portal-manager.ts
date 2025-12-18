@@ -15,6 +15,13 @@ type PortalData = {
   originalTileColor: number;
 };
 
+const PLAYER_COLORS = [
+  [Colors.BluePortal, Colors.OrangePortal], // Player 1
+  [0xff00ff, 0x00ffff], // Player 2: Magenta/Cyan
+  [0xffff00, 0x00ff00], // Player 3: Yellow/Lime
+  [0xff0080, 0x0080ff], // Player 4: Pink/Sky Blue
+];
+
 export default class PortalManager extends Behavior {
   static instance: PortalManager | undefined;
 
@@ -25,6 +32,9 @@ export default class PortalManager extends Behavior {
     string,
     { blue?: PortalData; orange?: PortalData }
   > = new Map();
+
+  private playerColorIndex: Map<string, number> = new Map();
+  private nextPlayerIndex = 0;
 
   onInitialize(): void {
     if (!this.game.isServer()) return;
@@ -166,12 +176,21 @@ export default class PortalManager extends Behavior {
       originalTileColor: portalTileColor,
     };
 
+    // Get player color index
+    if (!this.playerColorIndex.has(playerRef)) {
+      this.playerColorIndex.set(playerRef, this.nextPlayerIndex % PLAYER_COLORS.length);
+      this.nextPlayerIndex++;
+    }
+    const colorIdx = this.playerColorIndex.get(playerRef)!;
+    const playerColors = PLAYER_COLORS[colorIdx];
+    const color = portalColor === "blue" ? playerColors[0] : playerColors[1];
+
     if (portalColor === "blue") {
       portals.blue = portalData;
-      this.tilemap.setColor(portalX, portalY, Colors.BluePortal);
+      this.tilemap.setColor(portalX, portalY, color);
     } else {
       portals.orange = portalData;
-      this.tilemap.setColor(portalX, portalY, Colors.OrangePortal);
+      this.tilemap.setColor(portalX, portalY, color);
     }
 
     this.game.prefabs._.ParticleContainer.cloneInto(this.game.world, {
@@ -180,8 +199,7 @@ export default class PortalManager extends Behavior {
         {
           type: ParticleRender,
           values: {
-            particleColor:
-              portalColor === "blue" ? Colors.BluePortal : Colors.OrangePortal,
+            particleColor: color,
           },
         },
       ],
