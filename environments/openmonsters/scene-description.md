@@ -192,7 +192,7 @@ server:
 prefabs:
 - DialogueText (UIPanel) (0, 0, 1, 1)
   - src/ui/dialogue-text.tsx
-- Player (Empty) (-23.41, -70.23, 1, 1)
+- Player (Empty) (36.76, -70.27, 1, 1)
   - src/player/movement.ts
   - src/camera/follow.ts
   - src/player/inventory.ts

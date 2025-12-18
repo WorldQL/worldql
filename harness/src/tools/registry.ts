@@ -35,10 +35,6 @@ import {
   toolDefinition as placePortalDef,
   toolHandler as placePortalHandler,
 } from "./place-portal.ts";
-import {
-  toolDefinition as getPortalsDef,
-  toolHandler as getPortalsHandler,
-} from "./get-portals.ts";
 
 /**
  * Active tools that are registered with the LLM.
@@ -67,7 +63,6 @@ export const TOOL_REGISTRY: Record<string, ToolHandler> = {
 export const ALL_TOOLS: Tool[] = [
   ...ACTIVE_TOOLS,
   placePortalDef,
-  getPortalsDef,
   placeBombDef,
   deletePlayerDef,
   levelSelectDef,
@@ -81,7 +76,6 @@ export const ALL_TOOLS: Tool[] = [
 export const ALL_TOOL_HANDLERS: Record<string, ToolHandler> = {
   ...TOOL_REGISTRY,
   PlacePortal: placePortalHandler,
-  GetPortals: getPortalsHandler,
   PlaceBomb: placeBombHandler,
   DeletePlayer: deletePlayerHandler,
   LevelSelect: levelSelectHandler,

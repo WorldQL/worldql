@@ -1,0 +1,18 @@
+{
+  "imports": {
+    "@dreamlab/engine": "./.dreamlab-engine/engine/mod.ts",
+    "@dreamlab/engine/internal": "./.dreamlab-engine/engine/internal.ts",
+    "@dreamlab/vendor/": "./.dreamlab-engine/engine/_deps/",
+    "@dreamlab/ui": "./.dreamlab-engine/ui/mod.ts",
+    "@dreamlab/ui/jsx-runtime": "./.dreamlab-engine/ui/jsx.ts",
+    "@dreamlab/util/": "./.dreamlab-engine/util/"
+  },
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "dom"
+    ],
+    "noImplicitOverride": false,
+    "jsxImportSource": "@dreamlab/ui"
+  }
+}

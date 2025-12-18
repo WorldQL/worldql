@@ -32,7 +32,9 @@ export const toolHandler: ToolHandler = async (input) => {
   const moves = input.moves as Array<{ x: number; y: number }>;
 
   if (!ref || !moves) {
-    return JSON.stringify({ error: "Missing required parameters: ref or moves" });
+    return JSON.stringify({
+      error: "Missing required parameters: ref or moves",
+    });
   }
 
   const results: unknown[] = [];
@@ -42,10 +44,9 @@ export const toolHandler: ToolHandler = async (input) => {
     const y = move.y;
 
     // It absolutely breaks its brain to have -y be down so we just flip the sign
-    const data = await callGameAPI("move-player", [
-      ref,
-      { x: x, y: y * -1 },
-    ]);
+    const data = await callGameAPI("move-player", [ref, { x: x, y: y * -1 }]);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (!data.result) {
       return JSON.stringify({

@@ -1,0 +1,971 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "engine_revision": "2024-08.001"
+  },
+  "scenes": {
+    "main": {
+      "registration": [],
+      "world": [
+        {
+          "ref": "ent_UCh6CCc30E",
+          "type": "@core/Empty",
+          "name": "TileActionManager",
+          "transform": {
+            "position": {
+              "x": -1.697342121440184,
+              "y": 0.04471643147385784
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_fQe1FxIQhw",
+              "script": "res://src/tiles/action-manager.ts"
+            }
+          ]
+        },
+        {
+          "ref": "ent_diIkTR4dUm",
+          "type": "@core/Tilemap",
+          "name": "Tilemap",
+          "transform": {
+            "z": -1
+          },
+          "data": "AR-LCAAAAAAAAAPt2kFqwkAYhuEsvI5Qt3MKN26yddcKAQ8S79CLprVUsJKCDWQS-j0P_riQhMziJQzO--uxO3Xn8lK2u7bZNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALCIUsowNks_FzA__UOu9rAf7kf_kEP_kEv_kEv_kGusff1DhkvfD7fRP2Tx_odc9v-QS_-QS_-QS_-Qy_l_yKV_AODB8D0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEejt2p-5ctrvPT9tsln4cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJZUShmmztT71V4jME7_kOvWZHvY_5j7Xn_7ber9aq8RGFer_-tc-v7ru_YagXH6h1zP9Kp_-J_m6v_xnvb_sD5z9n-9_jb6h_Xx_odctfb_-of18f8_5NI_5NI_5HrmvP5fzvFPvQ6oT_8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArMUHV20kPCIACAA"
+        },
+        {
+          "ref": "ent_tUIB7SN9k8",
+          "type": "@core/Empty",
+          "name": "RoomOffset",
+          "transform": {
+            "position": {
+              "x": -29.347689196893505,
+              "y": -62.58627046657257
+            }
+          }
+        },
+        {
+          "ref": "ent_Az9AU3oSSi",
+          "type": "@core/Empty",
+          "name": "PortalManager",
+          "behaviors": [
+            {
+              "ref": "bhv_1y9cWWk9Gv",
+              "script": "res://src/mechanics/portal-manager.ts",
+              "values": {
+                "tilemap": "ent_diIkTR4dUm"
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_dM3x1zgfZL",
+          "type": "@core/Empty",
+          "name": "Portals",
+          "children": [
+            {
+              "ref": "ent_19MgQL42E2",
+              "type": "@core/Empty",
+              "name": "Level1",
+              "transform": {
+                "position": {
+                  "x": -29.58273393963516,
+                  "y": -62.64180428605875
+                }
+              },
+              "behaviors": [
+                {
+                  "ref": "bhv_uYTz3K98G6",
+                  "script": "res://src/mechanics/pushable-block-manager.ts",
+                  "values": {
+                    "tilemap": "ent_diIkTR4dUm"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "ref": "ent_vrpbkTcnqU",
+                  "type": "@core/Empty",
+                  "name": "LevelStart",
+                  "transform": {
+                    "position": {
+                      "x": 4.683588477716814,
+                      "y": -7.56193837442283
+                    }
+                  }
+                },
+                {
+                  "ref": "ent_EnJ5WHoLTf",
+                  "type": "@core/Empty",
+                  "name": "Win",
+                  "transform": {
+                    "position": {
+                      "x": 12.46994534535159,
+                      "y": -3.6645623915116303
+                    }
+                  },
+                  "behaviors": [
+                    {
+                      "ref": "bhv_7LiA1EpRNG",
+                      "script": "res://src/tiles/dialogue.ts",
+                      "values": {
+                        "prefab": "ent_wBpqHzazuk",
+                        "text": "You won! Now start level 2."
+                      }
+                    },
+                    {
+                      "ref": "bhv_5p1xyGzt25",
+                      "script": "res://src/tiles/teleport.ts",
+                      "values": {
+                        "target": "ent_0Varjh2hJn"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "ref": "ent_bZLSDBHNBx",
+                      "type": "@core/ColoredSquare",
+                      "name": "ColoredSquare",
+                      "values": {
+                        "color": [
+                          1,
+                          0.7803921699523926,
+                          0,
+                          1
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ref": "ent_s5fGKRTl6c",
+              "type": "@core/Empty",
+              "name": "Level2",
+              "transform": {
+                "position": {
+                  "x": -8.69091786929311,
+                  "y": -62.13635725755945
+                }
+              },
+              "behaviors": [
+                {
+                  "ref": "bhv_uYTz3K98G6",
+                  "script": "res://src/mechanics/pushable-block-manager.ts",
+                  "values": {
+                    "tilemap": "ent_diIkTR4dUm"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "ref": "ent_oJq2Xh0wgq",
+                  "type": "@core/Empty",
+                  "name": "Win",
+                  "transform": {
+                    "position": {
+                      "x": 10.109693273186107,
+                      "y": -4.4500718474347
+                    }
+                  },
+                  "behaviors": [
+                    {
+                      "ref": "bhv_7LiA1EpRNG",
+                      "script": "res://src/tiles/dialogue.ts",
+                      "values": {
+                        "prefab": "ent_wBpqHzazuk",
+                        "text": "You won!"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "ref": "ent_1WPha9IbqR",
+                      "type": "@core/ColoredSquare",
+                      "name": "ColoredSquare",
+                      "values": {
+                        "color": [
+                          1,
+                          0.7803921699523926,
+                          0,
+                          1
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "ref": "ent_0Varjh2hJn",
+                  "type": "@core/Empty",
+                  "name": "LevelStart",
+                  "transform": {
+                    "position": {
+                      "x": 3.1499912981578433,
+                      "y": -4.276872608250017
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ref": "ent_PkF25V5MnQ",
+          "type": "@core/UILayer",
+          "name": "MetricsUI",
+          "transform": {
+            "position": {
+              "x": -1.5641722128675075,
+              "y": -6.6756767063584315
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_eUV3vuGLih",
+              "script": "res://src/ui/player-metrics.tsx"
+            }
+          ]
+        },
+        {
+          "ref": "ent_qNRKTxI4Li",
+          "type": "@core/UILayer",
+          "name": "GameMenu",
+          "transform": {
+            "position": {
+              "x": -12.294580300328988,
+              "y": -74.00765402300124
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_qx8glJM4Kq",
+              "script": "res://src/ui/game-selection.tsx"
+            }
+          ]
+        }
+      ],
+      "local": [
+        {
+          "ref": "ent_TprIQECK7K",
+          "type": "@core/Camera",
+          "name": "Camera",
+          "values": {
+            "active": true,
+            "zoom": 0.5
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_trdz1qd86t",
+              "script": "res://src/camera/pan-zoom.ts"
+            }
+          ]
+        }
+      ],
+      "server": [
+        {
+          "ref": "ent_mi0ynfi2V4",
+          "type": "@core/Empty",
+          "name": "PlayerSpawner",
+          "behaviors": [
+            {
+              "ref": "bhv_OQaVMNLGV7",
+              "script": "res://src/player/spawner.ts",
+              "values": {
+                "playerPrefab": "ent_lXTrYV2qST"
+              }
+            }
+          ]
+        }
+      ],
+      "prefabs": [
+        {
+          "ref": "ent_wBpqHzazuk",
+          "type": "@core/UIPanel",
+          "name": "DialogueText",
+          "behaviors": [
+            {
+              "ref": "bhv_1TAzrMmL90",
+              "script": "res://src/ui/dialogue-text.tsx"
+            }
+          ]
+        },
+        {
+          "ref": "ent_lXTrYV2qST",
+          "type": "@core/Empty",
+          "name": "Player",
+          "transform": {
+            "position": {
+              "x": -23.405134261390423,
+              "y": -70.22825675647188
+            },
+            "z": 10
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_ReTzZwgE2e",
+              "script": "res://src/player/movement.ts",
+              "values": {
+                "tilemap": "ent_diIkTR4dUm",
+                "bombPrefab": "ent_VnBn0AvKdU"
+              }
+            },
+            {
+              "ref": "bhv_nRsjdlUkRJ",
+              "script": "res://src/camera/follow.ts"
+            },
+            {
+              "ref": "bhv_8G4jpzAhKx",
+              "script": "res://src/player/inventory.ts"
+            },
+            {
+              "ref": "bhv_FIDGmRlTQ5",
+              "script": "res://src/player/metrics.ts"
+            },
+            {
+              "ref": "bhv_ax2CJaaox1",
+              "script": "res://src/mechanics/portal-placement.ts",
+              "values": {
+                "tilemap": "ent_diIkTR4dUm"
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_ZcovmqLQCE",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare",
+              "values": {
+                "strokeColor": [
+                  0.9882352948188782,
+                  0.9882352948188782,
+                  0.9882352948188782,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_e9wHlQBi0W",
+              "type": "@core/RawPixi",
+              "name": "LightOverlay",
+              "enabled": false,
+              "transform": {
+                "z": -10
+              },
+              "behaviors": [
+                {
+                  "ref": "bhv_9vkSpcC7Hd",
+                  "script": "res://src/effects/light-overlay.ts",
+                  "values": {
+                    "target": "ent_lXTrYV2qST",
+                    "tilemap": "ent_diIkTR4dUm",
+                    "alpha": 1
+                  }
+                }
+              ]
+            },
+            {
+              "ref": "ent_oHS0hCoqAZ",
+              "type": "@core/RichText",
+              "name": "Name",
+              "transform": {
+                "z": 100
+              },
+              "values": {
+                "text": "PlayerName",
+                "stroke": true,
+                "strokeWidth": 5
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_MsRXK0tk1k",
+          "type": "@core/Empty",
+          "name": "GoldPile",
+          "transform": {
+            "position": {
+              "x": 3.8181818181818237,
+              "y": -2.000000000000003
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_MwUVG24AEK",
+              "script": "res://src/collectibles/gold.ts",
+              "values": {
+                "gold": 5
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_JOigraAc58",
+              "type": "@core/ColoredSquare",
+              "name": "Gold.1",
+              "transform": {
+                "position": {
+                  "x": -0.16123023191990238,
+                  "y": 0.1930221086365027
+                },
+                "rotation": 0.2067975581042239,
+                "scale": {
+                  "x": 0.3018900790492138,
+                  "y": 0.3156960128701915
+                }
+              },
+              "values": {
+                "color": [
+                  1,
+                  0.8666666746139526,
+                  0.1725490242242813,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_8okJNjfafY",
+              "type": "@core/ColoredSquare",
+              "name": "Gold.2",
+              "transform": {
+                "position": {
+                  "x": 0.23843907537450293,
+                  "y": -0.2634184070804033
+                },
+                "rotation": -0.5270014761212465,
+                "scale": {
+                  "x": 0.30790320452062786,
+                  "y": 0.3239110002086375
+                }
+              },
+              "values": {
+                "color": [
+                  1,
+                  0.8666666746139526,
+                  0.1725490242242813,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_VjKzMoJ40N",
+              "type": "@core/ColoredSquare",
+              "name": "Gold.3",
+              "transform": {
+                "position": {
+                  "x": -0.21345974366860299,
+                  "y": -0.25660586206970315
+                },
+                "rotation": 1.023670916513098,
+                "scale": {
+                  "x": 0.30790320452062786,
+                  "y": 0.3239110002086375
+                }
+              },
+              "values": {
+                "color": [
+                  1,
+                  0.8666666746139526,
+                  0.1725490242242813,
+                  1
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_Txd9bKFOEh",
+          "type": "@core/Empty",
+          "name": "BlueKey",
+          "transform": {
+            "position": {
+              "x": 4.498414006633439,
+              "y": -5.649171078097812
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_M9B9MK9WHe",
+              "script": "res://src/collectibles/key.ts",
+              "values": {
+                "keyColor": "blue"
+              }
+            },
+            {
+              "ref": "bhv_AGJDgdy5dc",
+              "script": "res://src/tiles/dialogue.ts",
+              "values": {
+                "prefab": "ent_wBpqHzazuk",
+                "text": "You picked up a BLUE KEY! Use to unlock blue doors (B)"
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_ZBSpBMU0dV",
+              "type": "@core/ColoredPolygon",
+              "name": "Key",
+              "transform": {
+                "position": {
+                  "x": -0.21343214342380423,
+                  "y": 0
+                }
+              },
+              "values": {
+                "width": 0.25,
+                "height": 0.25,
+                "sides": 100,
+                "color": [
+                  0,
+                  0.501960813999176,
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_1DhmiHwh8f",
+              "type": "@core/ColoredSquare",
+              "name": "Key.1",
+              "transform": {
+                "position": {
+                  "x": 0.09742339741465744,
+                  "y": 0
+                },
+                "scale": {
+                  "x": 0.5,
+                  "y": 0.1
+                }
+              },
+              "values": {
+                "color": [
+                  0,
+                  0.501960813999176,
+                  1,
+                  1
+                ],
+                "borderRadius": 10
+              }
+            },
+            {
+              "ref": "ent_03UBbizsg1",
+              "type": "@core/ColoredSquare",
+              "name": "Key.2",
+              "transform": {
+                "position": {
+                  "x": 0.2589293267719819,
+                  "y": -0.0520987186879745
+                },
+                "rotation": 1.5707963267948966,
+                "scale": {
+                  "x": 0.2,
+                  "y": 0.075
+                }
+              },
+              "values": {
+                "color": [
+                  0,
+                  0.501960813999176,
+                  1,
+                  1
+                ],
+                "borderRadius": 10
+              }
+            },
+            {
+              "ref": "ent_6716ileqiL",
+              "type": "@core/ColoredSquare",
+              "name": "Key.3",
+              "transform": {
+                "position": {
+                  "x": 0.0817937913478195,
+                  "y": -0.053835362783299756
+                },
+                "rotation": 1.5707963267948966,
+                "scale": {
+                  "x": 0.1,
+                  "y": 0.075
+                }
+              },
+              "values": {
+                "color": [
+                  0,
+                  0.501960813999176,
+                  1,
+                  1
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_WEYOeTh4iV",
+          "type": "@core/Empty",
+          "name": "GreenKey",
+          "transform": {
+            "position": {
+              "x": -2.393939393939398,
+              "y": -2.757575757575762
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_M9B9MK9WHe",
+              "script": "res://src/collectibles/key.ts",
+              "values": {
+                "keyColor": "green"
+              }
+            },
+            {
+              "ref": "bhv_MsATyqu8gr",
+              "script": "res://src/tiles/dialogue.ts",
+              "values": {
+                "prefab": "ent_wBpqHzazuk",
+                "text": "You picked up a GREEN KEY! Use to unlock green doors (G)"
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_7opPiFbLlX",
+              "type": "@core/ColoredPolygon",
+              "name": "Key",
+              "transform": {
+                "position": {
+                  "x": -0.21343214342380423,
+                  "y": 0
+                }
+              },
+              "values": {
+                "width": 0.25,
+                "height": 0.25,
+                "sides": 100,
+                "color": [
+                  0.11764705926179886,
+                  0.843137264251709,
+                  0.3764705955982208,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_Pwa3gR283R",
+              "type": "@core/ColoredSquare",
+              "name": "Key.1",
+              "transform": {
+                "position": {
+                  "x": 0.09742339741465744,
+                  "y": 0
+                },
+                "scale": {
+                  "x": 0.5,
+                  "y": 0.1
+                }
+              },
+              "values": {
+                "color": [
+                  0.11764705926179886,
+                  0.843137264251709,
+                  0.3764705955982208,
+                  1
+                ],
+                "borderRadius": 10
+              }
+            },
+            {
+              "ref": "ent_q1rnhBpPZ1",
+              "type": "@core/ColoredSquare",
+              "name": "Key.2",
+              "transform": {
+                "position": {
+                  "x": 0.2589293267719819,
+                  "y": -0.0520987186879745
+                },
+                "rotation": 1.5707963267948966,
+                "scale": {
+                  "x": 0.2,
+                  "y": 0.075
+                }
+              },
+              "values": {
+                "color": [
+                  0.11764705926179886,
+                  0.843137264251709,
+                  0.3764705955982208,
+                  1
+                ],
+                "borderRadius": 10
+              }
+            },
+            {
+              "ref": "ent_t5pxANRkg4",
+              "type": "@core/ColoredSquare",
+              "name": "Key.3",
+              "transform": {
+                "position": {
+                  "x": 0.0817937913478195,
+                  "y": -0.053835362783299756
+                },
+                "rotation": 1.5707963267948966,
+                "scale": {
+                  "x": 0.1,
+                  "y": 0.075
+                }
+              },
+              "values": {
+                "color": [
+                  0.11764705926179886,
+                  0.843137264251709,
+                  0.3764705955982208,
+                  1
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_Max3aWwgwt",
+          "type": "@core/Empty",
+          "name": "Enemy",
+          "transform": {
+            "position": {
+              "x": 0.21212121212121282,
+              "y": -3.000000000000004
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_EBFYmajJfi",
+              "script": "res://src/enemies/movement.ts",
+              "values": {
+                "tilemap": "ent_diIkTR4dUm"
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_4EWLGwHCL5",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare",
+              "values": {
+                "color": [
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_vECXqaaXMj",
+          "type": "@core/Empty",
+          "name": "BombPickup",
+          "transform": {
+            "position": {
+              "x": 2,
+              "y": 1
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_6WZeGW7SCk",
+              "script": "res://src/collectibles/bomb.ts"
+            },
+            {
+              "ref": "bhv_ZdhtGXLYli",
+              "script": "res://src/tiles/dialogue.ts",
+              "values": {
+                "prefab": "ent_wBpqHzazuk",
+                "text": "You picked up a BOMB! Press space to place to blow open weak walls."
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_cFXP5GuamQ",
+              "type": "@core/ColoredPolygon",
+              "name": "ColoredPolygon",
+              "transform": {
+                "position": {
+                  "x": 0,
+                  "y": -0.1
+                },
+                "scale": {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              },
+              "values": {
+                "sides": 24,
+                "color": [
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_TlRktOz2Nx",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare",
+              "transform": {
+                "position": {
+                  "x": 0,
+                  "y": 0.1
+                },
+                "scale": {
+                  "x": 0.2,
+                  "y": 0.2
+                },
+                "z": 1
+              },
+              "values": {
+                "color": [
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_rE1ywGi5rn",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare.1",
+              "transform": {
+                "position": {
+                  "x": 0.016453915248353823,
+                  "y": 0.213416959544807
+                },
+                "rotation": -0.43890467125564914,
+                "scale": {
+                  "x": 0.02526189692774125,
+                  "y": 0.15037047946095597
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_VnBn0AvKdU",
+          "type": "@core/Empty",
+          "name": "BombPlaced",
+          "transform": {
+            "position": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_QK5r0kI0Gb",
+              "script": "res://src/mechanics/placed-bomb.ts",
+              "values": {
+                "tilemap": "ent_diIkTR4dUm"
+              }
+            }
+          ],
+          "children": [
+            {
+              "ref": "ent_Wrbxzit0Gd",
+              "type": "@core/ColoredPolygon",
+              "name": "ColoredPolygon",
+              "transform": {
+                "position": {
+                  "x": 0,
+                  "y": -0.1
+                },
+                "scale": {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              },
+              "values": {
+                "sides": 24,
+                "color": [
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_M6vB4o0xrr",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare",
+              "transform": {
+                "position": {
+                  "x": 0,
+                  "y": 0.1
+                },
+                "scale": {
+                  "x": 0.2,
+                  "y": 0.2
+                },
+                "z": 1
+              },
+              "values": {
+                "color": [
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  0.06666667014360428,
+                  1
+                ]
+              }
+            },
+            {
+              "ref": "ent_dDt1AphBq6",
+              "type": "@core/ColoredSquare",
+              "name": "ColoredSquare.1",
+              "transform": {
+                "position": {
+                  "x": 0.0165,
+                  "y": 0.2134
+                },
+                "rotation": -0.43890467125564914,
+                "scale": {
+                  "x": 0.02526189692774125,
+                  "y": 0.15037047946095597
+                }
+              },
+              "values": {
+                "color": [
+                  1,
+                  0.5333333611488342,
+                  0.20392157137393951,
+                  1
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "ref": "ent_ULXAZli7Ru",
+          "type": "@core/RawPixi",
+          "name": "ParticleContainer",
+          "transform": {
+            "position": {
+              "x": 2.6307610665709973,
+              "y": -73.298091049844
+            }
+          },
+          "behaviors": [
+            {
+              "ref": "bhv_rzhArG245U",
+              "script": "res://src/effects/particle.ts",
+              "values": {
+                "particleColor": "#007aff",
+                "ringRadius": 1.4,
+                "swirSpeed": 0.2
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

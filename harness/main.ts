@@ -13,6 +13,7 @@ import {
   validateApiKey,
 } from "./src/interactive-prompts.ts";
 import { ALL_TOOLS } from "./src/tools/registry.ts";
+import { extractShortModelName, setModelName } from "./src/context.ts";
 
 // Load environment variables
 await loadEnv({ envPath: ".env.local", export: true });
@@ -87,6 +88,10 @@ if (useInteractive) {
   );
   console.log();
 }
+
+// Set model name in context for player spawning
+const shortName = extractShortModelName(model);
+setModelName(shortName);
 
 // Get API key and base URL based on provider
 let apiKey: string;
