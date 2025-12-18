@@ -48,6 +48,12 @@
           "ref": "ent_Az9AU3oSSi",
           "type": "@core/Empty",
           "name": "PortalManager",
+          "transform": {
+            "position": {
+              "x": -36.51012369193238,
+              "y": -69.12830526442018
+            }
+          },
           "behaviors": [
             {
               "ref": "bhv_1y9cWWk9Gv",
@@ -216,8 +222,8 @@
           "name": "MetricsUI",
           "transform": {
             "position": {
-              "x": -1.5641722128675075,
-              "y": -6.6756767063584315
+              "x": -48.82346937755155,
+              "y": -67.27877542342384
             }
           },
           "behaviors": [
@@ -250,6 +256,12 @@
           "ref": "ent_TprIQECK7K",
           "type": "@core/Camera",
           "name": "Camera",
+          "transform": {
+            "position": {
+              "x": -22.42499983108536,
+              "y": -69.96599947298634
+            }
+          },
           "values": {
             "active": true,
             "zoom": 0.5
@@ -267,6 +279,12 @@
           "ref": "ent_mi0ynfi2V4",
           "type": "@core/Empty",
           "name": "PlayerSpawner",
+          "transform": {
+            "position": {
+              "x": -41.87638442336571,
+              "y": -91.04730682410867
+            }
+          },
           "behaviors": [
             {
               "ref": "bhv_OQaVMNLGV7",

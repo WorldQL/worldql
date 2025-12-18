@@ -22,7 +22,12 @@ const MODEL_CHOICES = {
 /**
  * Default tool names (matches Python DEFAULT_TOOLS)
  */
-const DEFAULT_TOOL_NAMES = ["MovePlayer", "SpawnPlayer", "ObserveWorld"];
+export const DEFAULT_TOOL_NAMES = [
+  "MovePlayer",
+  "SpawnPlayer",
+  "ObserveWorld",
+  "PlacePortal",
+];
 
 /**
  * Prompt user to select a provider

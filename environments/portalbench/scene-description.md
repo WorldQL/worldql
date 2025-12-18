@@ -5,7 +5,7 @@ world:
   - src/tiles/action-manager.ts
 - Tilemap (Tilemap) (0, 0, 1, 1)
 - RoomOffset (Empty) (-29.35, -62.59, 1, 1)
-- PortalManager (Empty) (0, 0, 1, 1)
+- PortalManager (Empty) (-36.51, -69.13, 1, 1)
   - src/mechanics/portal-manager.ts
 - Portals (Empty) (0, 0, 1, 1)
   - Level1 (Empty) (-29.58, -62.64, 1, 1)
@@ -21,17 +21,17 @@ world:
       - src/tiles/dialogue.ts
       - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
     - LevelStart (Empty) (3.15, -4.28, 1, 1)
-- MetricsUI (UILayer) (-1.56, -6.68, 1, 1)
+- MetricsUI (UILayer) (-48.82, -67.28, 1, 1)
   - src/ui/player-metrics.tsx
 - GameMenu (UILayer) (-12.29, -74.01, 1, 1)
   - src/ui/game-selection.tsx
 
 local:
-- Camera (Camera) (0, 0, 1, 1)
+- Camera (Camera) (-22.42, -69.97, 1, 1)
   - src/camera/pan-zoom.ts
 
 server:
-- PlayerSpawner (Empty) (0, 0, 1, 1)
+- PlayerSpawner (Empty) (-41.88, -91.05, 1, 1)
   - src/player/spawner.ts
 
 prefabs:

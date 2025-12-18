@@ -6,6 +6,7 @@ import { CLI } from "./src/cli.ts";
 import type { Tool } from "./src/llm/types.ts";
 import {
   buildToolRegistry,
+  DEFAULT_TOOL_NAMES,
   promptForInitialPrompt,
   promptForModel,
   promptForProvider,
@@ -39,7 +40,7 @@ let selectedPrompt: string | null = null;
 
 if (useInteractive) {
   // Interactive mode with Clack prompts
-  p.intro("WorldQL");
+  p.intro("WorldQL LLM Harness");
 
   provider = await promptForProvider();
   validateApiKey(provider);
@@ -47,7 +48,7 @@ if (useInteractive) {
 
   // Get default tools (matches Python DEFAULT_TOOLS)
   const defaultTools = ALL_TOOLS.filter((t) =>
-    ["MovePlayer", "SpawnPlayer", "ObserveWorld"].includes(t.name)
+    DEFAULT_TOOL_NAMES.includes(t.name)
   );
   selectedTools = await promptForTools(defaultTools);
 
