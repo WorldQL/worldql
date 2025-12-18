@@ -33,7 +33,7 @@ export function extractShortModelName(model: string): string {
     if (modelLower.includes("flash")) {
       return "GeminiFlash";
     } else if (modelLower.includes("pro")) {
-      return "GeminiPro";
+      return "Gemini Pro 3";
     } else {
       return "Gemini";
     }
@@ -47,7 +47,9 @@ export function extractShortModelName(model: string): string {
     const parts = model.split("/");
     const lastPart = parts[parts.length - 1];
     const firstWord = lastPart.split("-")[0];
-    return firstWord.substring(0, 10).charAt(0).toUpperCase() +
-      firstWord.substring(1, 10);
+    return (
+      firstWord.substring(0, 10).charAt(0).toUpperCase() +
+      firstWord.substring(1, 10)
+    );
   }
 }
