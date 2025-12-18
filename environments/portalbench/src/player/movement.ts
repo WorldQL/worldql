@@ -46,7 +46,7 @@ export default class PlayerMovement extends Behavior {
   #restart = this.inputs.create("@player/restart", "Restart Level", "KeyR");
 
   @value()
-  moveCooldownTicks: number = 0;
+  moveCooldownTicks: number = 10;
 
   @value()
   isDead = false;
@@ -122,26 +122,28 @@ export default class PlayerMovement extends Behavior {
   }
 
   #moveTicks: number = 0;
+  #clientCooldown: number = 0;
+
   #tryQueueMoveThisTick() {
     const inventory = this.entity.getBehavior(InventoryBehavior);
-    if (this.#moveTicks > 0) {
-      this.#moveTicks -= 1;
+
+    if (this.#clientCooldown > 0) {
+      this.#clientCooldown--;
       return;
     }
 
     if (this.#place.pressed && inventory.bombs > 0) {
-      this.#moveTicks += this.moveCooldownTicks;
       this.#queueMove({ t: "place-bomb", x: this.#pos.x, y: this.#pos.y });
-
+      this.#clientCooldown = this.moveCooldownTicks;
       return;
     }
 
-    const x = (-this.#left.pressed + +this.#right.pressed) as -1 | 0 | 1;
-    const y = (-this.#down.pressed + +this.#up.pressed) as -1 | 0 | 1;
+    const x = (-this.#left.held + +this.#right.held) as -1 | 0 | 1;
+    const y = (-this.#down.held + +this.#up.held) as -1 | 0 | 1;
     if (x === 0 && y === 0) return;
 
-    this.#moveTicks += this.moveCooldownTicks;
     this.#queueMove({ t: "move", x, y });
+    this.#clientCooldown = this.moveCooldownTicks;
   }
 
   checkMove(x: -1 | 0 | 1, y: -1 | 0 | 1): Vector2 | undefined {
@@ -176,13 +178,21 @@ export default class PlayerMovement extends Behavior {
   }
 
   moveTo(newPos: Vector2): { success: boolean; actions?: Action[] } {
-    if (!this.canMoveYet()) return { success: false };
+    // Puppet players (API-controlled) skip cooldown
+    const isPuppet = this.entity.authority === "server";
 
-    this.#moveTicks += this.moveCooldownTicks;
+    if (!isPuppet && !this.canMoveYet()) return { success: false };
+
+    if (!isPuppet) {
+      this.#moveTicks += this.moveCooldownTicks;
+    }
 
     const signal = this.game.fire(PlayerMoved, this, newPos);
     if (signal.cancelled) return { success: false };
-    this.#moveTicks += signal.delay;
+
+    if (!isPuppet) {
+      this.#moveTicks += signal.delay;
+    }
 
     this.#pos.assign(signal.teleport ?? newPos);
 
@@ -197,7 +207,10 @@ export default class PlayerMovement extends Behavior {
   }
 
   placeBomb(): { success: boolean; error?: string } {
-    if (!this.canMoveYet())
+    // Puppet players (API-controlled) skip cooldown
+    const isPuppet = this.entity.authority === "server";
+
+    if (!isPuppet && !this.canMoveYet())
       return { success: false, error: "can't place yet!" };
 
     if (!this.bombPrefab)
@@ -212,7 +225,9 @@ export default class PlayerMovement extends Behavior {
       transform: { position: this.#pos, z: 20 },
     });
 
-    this.#moveTicks += this.moveCooldownTicks;
+    if (!isPuppet) {
+      this.#moveTicks += this.moveCooldownTicks;
+    }
 
     return { success: true };
   }
