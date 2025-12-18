@@ -13,8 +13,31 @@ WorldQL is a game engine for building environments for RL or evaluation. It incl
 
 
 ## Get Started
-Enter this command in your terminal to get started:
+Enter this command in your terminal to get started. This will set up the engine and our CLI tool and clone this repo:
 ```
 curl -fsSL https://worldql.com/install.sh | sh
 ```
 Supports macOS, Linux, and Windows via WSL.
+
+Then, to run PortalBench
+```
+cd worldql/environments/portalbench
+wql up
+```
+and the game server will start up
+
+To run an AI to test it with, open another terminal and navigate to the harness folder and run it:
+```
+cd worldql/harness
+deno task start
+```
+and an interactive interface will start allowing you to select models and run. To configure API keys, create a `.env.local` file in the `harness` folder and enter:
+```
+OPENROUTER_API_KEY=your-key-here-if-using-openrouter
+
+# if using openai compatible models (including local ones)
+OPENAI_BASE_URL=http://localhost/v1
+OPENAI_API_KEY=something
+```
+
+We recommend using OpenRouter to test a wide variety of models.
