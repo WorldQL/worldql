@@ -17,7 +17,6 @@ import PushableBlockManager from "../mechanics/pushable-block-manager.ts";
 import TileActionManager from "../tiles/action-manager.ts";
 import InventoryBehavior from "./inventory.ts";
 import PlayerMetrics from "./metrics.ts";
-import { sign } from "../../.dreamlab-engine/engine/kv/_crypto.ts";
 
 type Action = { id: string; data: JsonValue };
 
@@ -194,7 +193,8 @@ export default class PlayerMovement extends Behavior {
       this.#moveTicks += signal.delay;
     }
 
-    this.#pos.assign(signal.teleport ?? newPos);
+    if (signal.teleport) this.teleportTo(new Vector2(signal.teleport));
+    else this.#pos.assign(newPos);
 
     const metrics = this.entity.getBehavior(PlayerMetrics);
     if (metrics) {
