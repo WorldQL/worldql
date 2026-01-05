@@ -84,7 +84,7 @@ export default class GameSelectionUI extends UIBehavior {
         if (cameraBehavior) {
           cameraBehavior.active = false;
         }
-        camera.cast(Camera).zoom = 1;
+        camera.cast(Camera).zoom = 0.5;
       }
 
       await this.respawnPlayer();
@@ -326,31 +326,66 @@ export default class GameSelectionUI extends UIBehavior {
           </button>
 
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.4rem", marginTop: '20px' }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.4rem",
+              marginTop: "20px",
+            }}
           >
-            <button
-              onClick={this.selectSpectate}
-              style={{
-                padding: "0.5rem 0.75rem",
-                fontSize: "0.85rem",
-                fontWeight: "400",
-                color: "rgba(255, 255, 255, 0.9)",
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                borderRadius: "0.2rem",
-                cursor: "pointer",
-                fontFamily: "monospace",
-                textAlign: "left",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.12)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
-              }}
-            >
-              👁️ Spectate
-            </button>
+            {this.isSpectating ? (
+              <button
+                onClick={() => this.selectGame(this.games[0])}
+                style={{
+                  padding: "0.5rem 0.75rem",
+                  fontSize: "0.85rem",
+                  fontWeight: "400",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderRadius: "0.2rem",
+                  cursor: "pointer",
+                  fontFamily: "monospace",
+                  textAlign: "left",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.12)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.08)";
+                }}
+              >
+                ▶ Join
+              </button>
+            ) : (
+              <button
+                onClick={this.selectSpectate}
+                style={{
+                  padding: "0.5rem 0.75rem",
+                  fontSize: "0.85rem",
+                  fontWeight: "400",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderRadius: "0.2rem",
+                  cursor: "pointer",
+                  fontFamily: "monospace",
+                  textAlign: "left",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.12)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.08)";
+                }}
+              >
+                👁️ Spectate
+              </button>
+            )}
           </div>
         </div>
       </div>
