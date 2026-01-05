@@ -21,7 +21,6 @@ export async function callGameAPI(
   identifier: string,
   params: unknown[]
 ): Promise<GameAPIResponse> {
-  console.log(GAME_API_BASE, { identifier, params });
   const response = await fetch(GAME_API_BASE, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

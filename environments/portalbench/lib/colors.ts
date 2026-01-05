@@ -9,7 +9,7 @@ export const enum Colors {
   BombWall = 0x4d4d4d, // Bombable wall
   GlassWall = 0x8f8e8e, // Glass wall - blocks movement but not line of sight
   PushableBlock = 0xe3288f,
-  BlockGoal = 0xffaa00, // Goal position for pushable blocks
+  BlockGoal = 0xebb1e4, // Goal position for pushable blocks
   BlockOnGoal = 0x88ff00, // Block successfully placed on goal
   BluePortal = 0x00aaff, // Blue portal
   OrangePortal = 0xff7700, // Orange portal
