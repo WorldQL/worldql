@@ -186,6 +186,8 @@ export default class PlayerMovement extends Behavior {
       this.#moveTicks += this.moveCooldownTicks;
     }
 
+    const oldPos = this.#pos.clone();
+
     const signal = this.game.fire(PlayerMoved, this, newPos);
     if (signal.cancelled) return { success: false };
 
@@ -195,6 +197,15 @@ export default class PlayerMovement extends Behavior {
 
     if (signal.teleport) this.teleportTo(new Vector2(signal.teleport));
     else this.#pos.assign(newPos);
+
+    const blockManager = PushableBlockManager.instance;
+    if (blockManager) {
+      blockManager.handlePlayerPositionChange(
+        this.entity.id,
+        oldPos,
+        this.#pos
+      );
+    }
 
     const metrics = this.entity.getBehavior(PlayerMetrics);
     if (metrics) {
@@ -233,8 +244,18 @@ export default class PlayerMovement extends Behavior {
   }
 
   teleportTo(position: Vector2): void {
+    const oldPos = this.#pos.clone();
     this.#pos.assign(position.floor());
     this.entity.setTransform({ position: this.#pos });
+
+    const blockManager = PushableBlockManager.instance;
+    if (blockManager) {
+      blockManager.handlePlayerPositionChange(
+        this.entity.id,
+        oldPos,
+        this.#pos
+      );
+    }
   }
 
   @value({ type: EntityRef })

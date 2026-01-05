@@ -26,8 +26,15 @@ world:
     - src/mechanics/pushable-block-manager.ts
     - Win (Empty) (21.47, -13, 1, 1)
       - src/tiles/dialogue.ts
+      - src/tiles/teleport.ts
       - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
     - LevelStart (Empty) (29.85, -3.03, 1, 1)
+  - Level4 (Empty) (35.13, -62.14, 1, 1)
+    - src/mechanics/pushable-block-manager.ts
+    - Win (Empty) (-0.59, -12.9, 1, 1)
+      - src/tiles/dialogue.ts
+      - ColoredSquare (ColoredSquare) (0, 0, 1, 1)
+    - LevelStart (Empty) (3.79, -3.67, 1, 1)
 - MetricsUI (UILayer) (-48.82, -67.28, 1, 1)
   - src/ui/player-metrics.tsx
 - GameMenu (UILayer) (-12.29, -74.01, 1, 1)
@@ -44,7 +51,7 @@ server:
 prefabs:
 - DialogueText (UIPanel) (0, 0, 1, 1)
   - src/ui/dialogue-text.tsx
-- Player (Empty) (17.54, -67.3, 1, 1)
+- Player (Empty) (21.3, -67.3, 1, 1)
   - src/player/movement.ts
   - src/camera/follow.ts
   - src/player/inventory.ts

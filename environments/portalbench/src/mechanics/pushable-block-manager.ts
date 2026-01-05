@@ -17,6 +17,8 @@ const PORTAL_PAIRS = [
   [0xff0080, 0x0080ff], // Player 4: Pink/Sky Blue
 ];
 
+type GoalType = "neutral" | "green" | "blue";
+
 export default class PushableBlockManager extends Behavior {
   @value({ type: EntityRef })
   tilemap: Entity | undefined;
@@ -24,6 +26,9 @@ export default class PushableBlockManager extends Behavior {
   #lastPlayerPos: Map<string, Vector2> = new Map();
   #initialBlockPositions: Vector2[] = [];
   #goalPositions: Set<string> = new Set();
+  #goalTypes: Map<string, GoalType> = new Map();
+  #doorPositions: Map<string, number> = new Map();
+  #playersOnGoals: Map<string, Set<string>> = new Map();
 
   public static instance: PushableBlockManager | undefined;
 
@@ -35,7 +40,7 @@ export default class PushableBlockManager extends Behavior {
 
     this.#scanTilemap(tilemap);
 
-    this.listen(this.game, PlayerMoved, (ev) => {
+    this.listen(this.game, PlayerMoved, (ev: PlayerMoved) => {
       const playerId = ev.player.entity.id;
       const to = ev.position;
       const from = this.#lastPlayerPos.get(playerId);
@@ -49,7 +54,9 @@ export default class PushableBlockManager extends Behavior {
       const blockColor = tilemap.getColor(to.x, to.y);
       if (
         blockColor !== Colors.PushableBlock &&
-        blockColor !== Colors.BlockOnGoal
+        blockColor !== Colors.BlockOnGoal &&
+        blockColor !== Colors.BlockOnGoalGreen &&
+        blockColor !== Colors.BlockOnGoalBlue
       ) {
         const finalPos = ev.teleport || to;
         this.#lastPlayerPos.set(playerId, new Vector2(finalPos.x, finalPos.y));
@@ -67,11 +74,16 @@ export default class PushableBlockManager extends Behavior {
       };
 
       const fromKey = `${to.x},${to.y}`;
+      const fromGoalType = this.#goalTypes.get(fromKey) || "neutral";
 
       const restoreColor = this.#goalPositions.has(fromKey)
-        ? Colors.BlockGoal
+        ? this.#getGoalColor(fromGoalType)
         : Colors.Grass;
       tilemap.setColor(to.x, to.y, restoreColor);
+
+      if (fromGoalType !== "neutral") {
+        this.#toggleDoors(tilemap, fromGoalType);
+      }
 
       const targetTileColor = tilemap.getColor(oppositePos.x, oppositePos.y);
       const pairedPortalColor = this.#getPairedPortalColor(targetTileColor);
@@ -95,10 +107,16 @@ export default class PushableBlockManager extends Behavior {
       }
 
       const finalKey = `${finalBlockPos.x},${finalBlockPos.y}`;
+      const toGoalType = this.#goalTypes.get(finalKey) || "neutral";
+
       const newBlockColor = this.#goalPositions.has(finalKey)
-        ? Colors.BlockOnGoal
+        ? this.#getBlockOnGoalColor(toGoalType)
         : Colors.PushableBlock;
       tilemap.setColor(finalBlockPos.x, finalBlockPos.y, newBlockColor);
+
+      if (toGoalType !== "neutral") {
+        this.#toggleDoors(tilemap, toGoalType);
+      }
 
       const finalPlayerPos = ev.teleport || to;
       this.#lastPlayerPos.set(
@@ -116,12 +134,35 @@ export default class PushableBlockManager extends Behavior {
         const color = tilemap.getColor(x, y);
         if (!color) continue;
 
-        if (color === Colors.PushableBlock || color === Colors.BlockOnGoal) {
+        if (
+          color === Colors.PushableBlock ||
+          color === Colors.BlockOnGoal ||
+          color === Colors.BlockOnGoalGreen ||
+          color === Colors.BlockOnGoalBlue
+        ) {
           this.#initialBlockPositions.push(new Vector2(x, y));
         }
 
+        const key = `${x},${y}`;
         if (color === Colors.BlockGoal || color === Colors.BlockOnGoal) {
-          this.#goalPositions.add(`${x},${y}`);
+          this.#goalPositions.add(key);
+          this.#goalTypes.set(key, "neutral");
+        } else if (
+          color === Colors.BlockGoalGreen ||
+          color === Colors.BlockOnGoalGreen
+        ) {
+          this.#goalPositions.add(key);
+          this.#goalTypes.set(key, "green");
+        } else if (
+          color === Colors.BlockGoalBlue ||
+          color === Colors.BlockOnGoalBlue
+        ) {
+          this.#goalPositions.add(key);
+          this.#goalTypes.set(key, "blue");
+        }
+
+        if (color === Colors.GreenDoor || color === Colors.BlueDoor) {
+          this.#doorPositions.set(key, color);
         }
       }
     }
@@ -129,6 +170,87 @@ export default class PushableBlockManager extends Behavior {
 
   public isGoalPosition(x: number, y: number): boolean {
     return this.#goalPositions.has(`${x},${y}`);
+  }
+
+  public handlePlayerPositionChange(
+    playerId: string,
+    oldPos: IVector2,
+    newPos: IVector2
+  ): void {
+    const tilemap = this.tilemap?.cast(Tilemap);
+    if (!tilemap) return;
+
+    const oldKey = `${Math.floor(oldPos.x)},${Math.floor(oldPos.y)}`;
+    const newKey = `${Math.floor(newPos.x)},${Math.floor(newPos.y)}`;
+
+    if (oldKey === newKey) return;
+
+    const newGoalType = this.#goalTypes.get(newKey);
+    if (newGoalType && newGoalType !== "neutral") {
+      let playersOnGoal = this.#playersOnGoals.get(newKey);
+      if (!playersOnGoal) {
+        playersOnGoal = new Set();
+        this.#playersOnGoals.set(newKey, playersOnGoal);
+      }
+
+      if (playersOnGoal.size === 0) {
+        this.#toggleDoors(tilemap, newGoalType);
+      }
+      playersOnGoal.add(playerId);
+    }
+
+    const oldGoalType = this.#goalTypes.get(oldKey);
+    if (oldGoalType && oldGoalType !== "neutral") {
+      const playersOnGoal = this.#playersOnGoals.get(oldKey);
+      if (playersOnGoal && playersOnGoal.has(playerId)) {
+        playersOnGoal.delete(playerId);
+        if (playersOnGoal.size === 0) {
+          this.#toggleDoors(tilemap, oldGoalType);
+        }
+      }
+    }
+  }
+
+  #getGoalColor(goalType: GoalType): number {
+    switch (goalType) {
+      case "green":
+        return Colors.BlockGoalGreen;
+      case "blue":
+        return Colors.BlockGoalBlue;
+      default:
+        return Colors.BlockGoal;
+    }
+  }
+
+  #getBlockOnGoalColor(goalType: GoalType): number {
+    switch (goalType) {
+      case "green":
+        return Colors.BlockOnGoalGreen;
+      case "blue":
+        return Colors.BlockOnGoalBlue;
+      default:
+        return Colors.BlockOnGoal;
+    }
+  }
+
+  #toggleDoors(tilemap: Tilemap, goalType: GoalType): void {
+    if (goalType === "neutral") return;
+
+    const doorColor =
+      goalType === "green" ? Colors.GreenDoor : Colors.BlueDoor;
+
+    for (const [posKey, storedDoorColor] of this.#doorPositions.entries()) {
+      if (storedDoorColor !== doorColor) continue;
+
+      const [x, y] = posKey.split(",").map(Number);
+      const currentColor = tilemap.getColor(x, y);
+
+      if (currentColor === doorColor) {
+        tilemap.setColor(x, y, Colors.Grass);
+      } else if (currentColor === Colors.Grass) {
+        tilemap.setColor(x, y, doorColor);
+      }
+    }
   }
 
   public restart() {
@@ -139,25 +261,38 @@ export default class PushableBlockManager extends Behavior {
     for (let y = -scanRange; y <= scanRange; y++) {
       for (let x = -scanRange; x <= scanRange; x++) {
         const color = tilemap.getColor(x, y);
-        if (color === Colors.PushableBlock || color === Colors.BlockOnGoal) {
+        if (
+          color === Colors.PushableBlock ||
+          color === Colors.BlockOnGoal ||
+          color === Colors.BlockOnGoalGreen ||
+          color === Colors.BlockOnGoalBlue
+        ) {
           const key = `${x},${y}`;
+          const goalType = this.#goalTypes.get(key) || "neutral";
           const restoreColor = this.#goalPositions.has(key)
-            ? Colors.BlockGoal
+            ? this.#getGoalColor(goalType)
             : Colors.Grass;
           tilemap.setColor(x, y, restoreColor);
         }
       }
     }
 
+    for (const [posKey, doorColor] of this.#doorPositions.entries()) {
+      const [x, y] = posKey.split(",").map(Number);
+      tilemap.setColor(x, y, doorColor);
+    }
+
     for (const pos of this.#initialBlockPositions) {
       const key = `${pos.x},${pos.y}`;
+      const goalType = this.#goalTypes.get(key) || "neutral";
       const blockColor = this.#goalPositions.has(key)
-        ? Colors.BlockOnGoal
+        ? this.#getBlockOnGoalColor(goalType)
         : Colors.PushableBlock;
       tilemap.setColor(pos.x, pos.y, blockColor);
     }
 
     this.#lastPlayerPos.clear();
+    this.#playersOnGoals.clear();
   }
 
   #getPairedPortalColor(color: number): number | undefined {

@@ -31,7 +31,7 @@
           "transform": {
             "z": -1
           },
-          "data": "AR-LCAAAAAAAAAPt27FtwkAYgFEKJkmVBim0NwUNjVu6BMkSg5gdskH2yBZJlyGcgIJk0CXGljkM9574RWE4ccUny7J5fV6V63ITnsJsXkymEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALiKEEIdmy6fPWdS7wto17X_YrmITtux1PsC2sVa1T_kYej-Px63-ocb4fwP-dI_5CvWvv4hD9uqqg_T5f7fw_J9P6f3DZrrNddMvS-g3VDn__9G_zBOQ13_6x9uj_4hX336_3r71D_cAed_yNdQz__rH26P__8BACfq3wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBTL6tyXW7CbP7zKibTa_8cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK4phFD3nb7rpd4jEKd_yNehyWK5OJpmr38d67te6j0Ccan63822qvbvqfcIxOkf8nVOr_qH-3Sp_k_XdP0P43PJ_nffP4z-YXyc_yFfqa7_9Q_j4_4_5Ev_kC_9Q77OeV6_y3P8fb8HpKd_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbiGyIv5aEiAAgA"
+          "data": "AR-LCAAAAAAAAAPt2kFugkAYBlAXnsRVNyZ1O6dw44atu7YJiQfBO3TpWbxFD0LVlMQa2joEBuy8p19MBP7I4stI4P1lW76Vu_AclqtiNp8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAKEIIdVti9r0nKeYBcWL7WmzWrflrW4p5QJy2bk2p_4fTS_9hGH33_-Np32v_Y-YBcaa-_vv_D8MZu_9NFsfFJdffWf9hWG3dt_5DHvZVVTeJuV-32Bwvub1vcD3vemaKeUCcvtb_35JqHhCnr-t__YfHo_-Qry79PxzrXvvf1zwgjvUf8tXX8__6D48ntv9dk2IeANCL-isAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk6nVbvpW7sFyd3sVsPvbPAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGBMIYS6a7rOS32OQDv9h3w1nSw262-57utP27rOS32OQLtU_T9nX1WXz9TnCLTTf8jXPX3Vf_ifhur_7UzX_zA9Q_b_fHwT_Yfpsf5DvlJd_-s_TI_7_5Av_Yd86T_k657n9WOe4-96HJCe_gMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwFZ_8zv4YIgAIAA"
         },
         {
           "ref": "ent_tUIB7SN9k8",
@@ -259,6 +259,13 @@
                         "prefab": "ent_wBpqHzazuk",
                         "text": "You won!"
                       }
+                    },
+                    {
+                      "ref": "bhv_UTV2Ljkjg0",
+                      "script": "res://src/tiles/teleport.ts",
+                      "values": {
+                        "target": "ent_KFsrnoM8cd"
+                      }
                     }
                   ],
                   "children": [
@@ -285,6 +292,75 @@
                     "position": {
                       "x": 29.846960576329597,
                       "y": -3.034448686366318
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "ref": "ent_ZBMH8qAnFe",
+              "type": "@core/Empty",
+              "name": "Level4",
+              "transform": {
+                "position": {
+                  "x": 35.13447601401738,
+                  "y": -62.13635725755945
+                }
+              },
+              "behaviors": [
+                {
+                  "ref": "bhv_uYTz3K98G6",
+                  "script": "res://src/mechanics/pushable-block-manager.ts",
+                  "values": {
+                    "tilemap": "ent_diIkTR4dUm"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "ref": "ent_9PdMCU5Tza",
+                  "type": "@core/Empty",
+                  "name": "Win",
+                  "transform": {
+                    "position": {
+                      "x": -0.5857817302496713,
+                      "y": -12.89792423211675
+                    }
+                  },
+                  "behaviors": [
+                    {
+                      "ref": "bhv_7LiA1EpRNG",
+                      "script": "res://src/tiles/dialogue.ts",
+                      "values": {
+                        "prefab": "ent_wBpqHzazuk",
+                        "text": "You won!"
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "ref": "ent_tLw7pAzy9q",
+                      "type": "@core/ColoredSquare",
+                      "name": "ColoredSquare",
+                      "values": {
+                        "color": [
+                          1,
+                          0.7803921699523926,
+                          0,
+                          1
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "ref": "ent_KFsrnoM8cd",
+                  "type": "@core/Empty",
+                  "name": "LevelStart",
+                  "transform": {
+                    "position": {
+                      "x": 3.7859795407592003,
+                      "y": -3.6688926406540077
                     }
                   }
                 }
@@ -390,7 +466,7 @@
           "name": "Player",
           "transform": {
             "position": {
-              "x": 17.540872372737788,
+              "x": 21.295907824683873,
               "y": -67.30005485288414
             },
             "z": 10
