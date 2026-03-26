@@ -23,7 +23,7 @@ Supports macOS, Linux, and Windows via WSL.
 Then, to run PortalBench
 ```
 cd worldql/environments/portalbench
-wql up
+dreamlab up
 ```
 and the game server will start up
 
